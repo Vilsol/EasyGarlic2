@@ -1,0 +1,33 @@
+{
+  "name": "easygarlic",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Pandawan",
+  "homepage": "./",
+  "main": "public/electron.js",
+  "dependencies": {
+    "electron-is-dev": "^0.3.0",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-scripts": "1.1.5"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "cross-env": "^5.2.0",
+    "electron": "^2.0.9",
+    "electron-builder": "^20.28.4",
+    "wait-on": "^3.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build — em.main=build/electron.js"
+  },
+  "build": {
+    "appId": "com.pandawan.easygarlic"
+  }
+}
