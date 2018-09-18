@@ -9,3 +9,4 @@ This is a total rewrite using Electron and React instead of C#'s WPF, allowing i
 - [Electron](https://electronjs.org/)
 - [Electron-Builder](https://github.com/electron-userland/electron-builder)
 - [Tutorial for Electron + React](https://medium.com/@kitze/%EF%B8%8F-from-react-to-an-electron-app-ready-for-production-a0468ecb1da3)
+- [Styling using Aphrodite](https://github.com/Khan/aphrodite)
