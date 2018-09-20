@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { css, StyleSheet } from 'aphrodite';
 
+import Navbar from 'Components/Navbar';
+
 const styles = StyleSheet.create({
-  title: {
-    color: '#333',
-    'font-family': 'sans-serif',
-  }
+  main: {
+    padding: '1em',
+  },
 });
 
 class App extends Component {
   render() {
+    const { children } = this.props;
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className={`App-title ${css(styles.title)}`}>Easy Garlic</h1>
-        </header>
+      <div id="App">
+        <Navbar />
+        <main className={css(styles.main)}>
+          { children || '' }
+        </main>
       </div>
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default App;

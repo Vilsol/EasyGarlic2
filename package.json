@@ -8,6 +8,7 @@
   "dependencies": {
     "aphrodite": "^2.2.3",
     "electron-is-dev": "^0.3.0",
+    "prop-types": "^15.6.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-router-dom": "^4.3.1",
@@ -26,12 +27,13 @@
     "wait-on": "^3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "preelectron-pack": "yarn build",
+    "start": "yarn electron-dev",
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test --env=jsdom",
+    "react-eject": "react-scripts eject",
+    "electron-dev": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "preelectron-pack": "yarn react-build",
     "electron-pack": "build — em.main=build/electron.js"
   },
   "build": {

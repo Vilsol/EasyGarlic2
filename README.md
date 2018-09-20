@@ -5,6 +5,12 @@ This is a total rewrite using Electron and React instead of C#'s WPF, allowing i
 
 ## Resources
 
+### Design
+
+- [Navbar design](https://medium.com/flexbox-and-grids/the-most-popular-navigation-bars-created-with-flexbox-6c0f59f55686)
+
+### Initial Setup
+
 - [Create-React-App](https://github.com/facebook/create-react-app)
 - [Electron](https://electronjs.org/)
 - [Electron-Builder](https://github.com/electron-userland/electron-builder)

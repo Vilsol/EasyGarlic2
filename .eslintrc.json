@@ -5,6 +5,13 @@
         "es6": true,
         "jest": true
     },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["./src"]
+            }
+        }
+    },
     "rules": {
         "react/jsx-filename-extension": "false",
         "react/prefer-stateless-function": "false",
