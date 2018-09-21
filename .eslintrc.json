@@ -17,6 +17,8 @@
         "react/prefer-stateless-function": "false",
         "react/jsx-one-expression-per-line": false,
         "jsx-a11y/heading-has-content": false,
+        "jsx-a11y/label-has-for": false,
+        "jsx-a11y/label-has-associated-control": false,
         "import/no-extraneous-dependencies": false,
         "semi": [
             "error",
