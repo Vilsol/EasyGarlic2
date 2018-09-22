@@ -44,8 +44,8 @@ class Setup extends Component {
       <nav id="Navbar" className={css(styles.nav)} aria-label="main navigation">
         <span className={css(styles.item, styles.logo, styles.lastOnLeft)}>EasyGarlic</span>
         <Link className={css(styles.item, styles.link)} to="/">Mining</Link>
+        <Link className={css(styles.item, styles.link)} to="/miners">Miners</Link>
         <Link className={css(styles.item, styles.link)} to="/settings">Settings</Link>
-        <Link className={css(styles.item, styles.link)} to="/about">About</Link>
       </nav>
     );
   }

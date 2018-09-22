@@ -8,12 +8,14 @@
   "dependencies": {
     "aphrodite": "^2.2.3",
     "electron-is-dev": "^0.3.0",
+    "electron-store": "^2.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
-    "react-select": "^2.0.0"
+    "react-select": "^2.0.0",
+    "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",

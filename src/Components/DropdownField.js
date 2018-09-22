@@ -58,7 +58,7 @@ DropdownField.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
+    value: PropTypes.any.isRequired,
     label: PropTypes.string.isRequired,
   })).isRequired,
 };
