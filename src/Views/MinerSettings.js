@@ -17,16 +17,17 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 0,
   },
+  actionButton: {
+    ':not(:first-child)': {
+      marginLeft: '0.5em',
+    },
+    ':not(:last-child)': {
+      marginRight: '0.5em',
+    },
+  },
 });
 
 class MinerSettings extends Component {
-  static getDerivedStateFromProps(nextProps, previousState) {
-    if (nextProps.miner !== previousState.minerValue) {
-      return { minerValue: nextProps.miner };
-    }
-    return null;
-  }
-
   constructor(props) {
     super(props);
     const { miner } = props;
@@ -80,8 +81,16 @@ class MinerSettings extends Component {
     const { onSave } = this.props;
     // Get the current miner value to pass as parameter
     const { minerValue } = this.state;
-    // Call the onSave prop
+    // Call the onSave prop (set miner = minerValue)
     onSave(minerValue);
+    /*
+      Since onSave sets miner = minerValue,
+      the miner prop passed to MinerSettings will be the same as minerValue.
+      This will cause any modification to minerValue to be reflected to the miner prop.
+      To fix it, make another deep clone so they are no longer equal.
+      Make a clone of the current minerValue so that prop's miner != state's minerValue
+    */
+    this.setState({ minerValue: cloneDeep(minerValue) });
   }
 
   /**
@@ -109,8 +118,8 @@ class MinerSettings extends Component {
           {/* TODO: Change defaultOption from 0 to whichever value is selected in the deviceOptions so that it autosets */}
           <DropdownField id="miner-device" label="Device" options={deviceOptions} onChange={this.handleChangeDevice} defaultIndex={0} />
           <div>
-            <Button id="save" label="Save" type="submit" variant={['primary', 'inline']} onClick={this.handleSaveButton} />
-            <Button id="reset" label="Reset" type="button" variant={['secondary', 'inline']} onClick={this.handleResetButton} />
+            <Button className={css(styles.actionButton)} id="save" label="Save" type="submit" variant={['primary', 'inline']} onClick={this.handleSaveButton} />
+            <Button className={css(styles.actionButton)} id="reset" label="Reset" type="button" variant={['secondary', 'inline']} onClick={this.handleResetButton} />
           </div>
         </form>
       </div>

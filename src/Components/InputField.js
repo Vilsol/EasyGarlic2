@@ -40,37 +40,10 @@ const styles = StyleSheet.create({
 });
 
 class InputField extends Component {
-  static getDerivedStateFromProps(nextProps, previousState) {
-    if (nextProps.value !== previousState.value) {
-      return { value: nextProps.value };
-    }
-    return null;
-  }
-
-  constructor(props) {
-    super(props);
-    const { value } = props;
-    this.state = {
-      value,
-    };
-    this.handleChangeValue = this.handleChangeValue.bind(this);
-  }
-
-  /**
-   * Called when the value of the input field is changed
-   * @param {Event} e The event object from the change event
-   */
-  handleChangeValue(e) {
-    const { onChange } = this.props;
-    // Update the state value of the field
-    this.setState({ value: e.target.value });
-    // Call the onChange prop
-    onChange(e.target.value);
-  }
-
   render() {
-    const { id, label } = this.props;
-    const { value } = this.state;
+    const {
+      id, label, value, onChange,
+    } = this.props;
     return (
       <div className={css(styles.inputField)}>
         <label className={css(styles.label)} htmlFor={id}>{label}</label>
@@ -81,7 +54,7 @@ class InputField extends Component {
           name={id}
           autoComplete="off"
           value={value}
-          onChange={this.handleChangeValue}
+          onChange={e => onChange(e.target.value)}
         />
       </div>
     );
