@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import PropTypes from 'prop-types';
 
+import { Colors } from 'Config';
+
 // Styles for the entire form and its content
 const styles = StyleSheet.create({
   button: {
@@ -14,6 +16,7 @@ const styles = StyleSheet.create({
     color: 'hsl(0,0%,50%)',
     fontSize: '1em',
     fontWeight: 'bold',
+    textDecoration: 'none',
     borderColor: 'hsl(0,0%,80%)',
     borderRadius: '4px',
     borderStyle: 'solid',
@@ -25,23 +28,23 @@ const styles = StyleSheet.create({
       borderColor: 'hsl(0,0%,70%)',
     },
     ':focus': {
-      borderColor: '#ffca42',
-      boxShadow: '0 0 0 1px #ffca42',
+      borderColor: Colors.primary,
+      boxShadow: `0 0 0 1px ${Colors.primary}`,
     },
   },
   primary: {
-    backgroundColor: '#ffca42',
-    color: '#24292e',
-    borderColor: '#ffd771',
+    backgroundColor: Colors.primary,
+    color: Colors.black,
+    borderColor: Colors.primaryLighter,
     ':hover': {
-      borderColor: '#f0ad00',
+      borderColor: Colors.primaryDarker,
     },
     ':focus': {
-      borderColor: '#f0ad00',
+      borderColor: Colors.primaryDarker,
     },
     ':active': {
-      backgroundColor: '#f0ad00',
-      borderColor: '#f0ad00',
+      backgroundColor: Colors.primaryDarker,
+      borderColor: Colors.primaryDarker,
     },
   },
   big: {
@@ -66,10 +69,11 @@ class Button extends Component {
     const {
       className, id, label, type, variant,
     } = this.props;
+    const variantArray = (typeof variant === 'string') ? [variant] : variant;
     if (type === 'submit') {
       return (
         <input
-          className={`${className} ${css(styles.button, variant.map(v => styles[v]))}`}
+          className={`${className} ${css(styles.button, variantArray.map(v => styles[v]))}`}
           id={id}
           type="submit"
           name={id}
@@ -80,7 +84,7 @@ class Button extends Component {
     }
     return (
       <button
-        className={`${className} ${css(styles.button, variant.map(v => styles[v]))}`}
+        className={`${className} ${css(styles.button, variantArray.map(v => styles[v]))}`}
         id={id}
         type="submit"
         name={id}
@@ -96,8 +100,13 @@ Button.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['submit', 'button']).isRequired,
-  variant: PropTypes.arrayOf(PropTypes.oneOf(['primary', 'secondary', 'big'])),
+  type: PropTypes.oneOf(['submit', 'button', 'link']).isRequired,
+  variant: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(
+      PropTypes.oneOf(['primary', 'secondary', 'big']),
+    ),
+  ]),
   onClick: PropTypes.func,
 };
 

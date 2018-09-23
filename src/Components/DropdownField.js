@@ -3,6 +3,8 @@ import { css, StyleSheet } from 'aphrodite';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
+import { Colors } from 'Config';
+
 // Styles for the entire form and its content
 const styles = StyleSheet.create({
   inputField: {
@@ -22,10 +24,10 @@ const styles = StyleSheet.create({
 const customStyles = {
   control: (style, { isFocused }) => (!isFocused ? style : {
     ...style,
-    borderColor: '#ffca42',
-    boxShadow: '0 0 0 1px #ffca42',
+    borderColor: Colors.primary,
+    boxShadow: `0 0 0 1px ${Colors.primary}`,
     ':hover': {
-      borderColor: '#ffca42',
+      borderColor: Colors.primary,
     },
   }),
 };

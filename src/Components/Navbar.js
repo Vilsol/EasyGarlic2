@@ -2,19 +2,22 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { css, StyleSheet } from 'aphrodite';
 
-// Garlicoin yellow: #ffca42
-// GitHub black (aka Bluck): #24292e
+import { Colors } from 'Config';
 
 const styles = StyleSheet.create({
   nav: {
     width: '100%',
     minHeight: '1.5em',
-    backgroundColor: '#24292e',
+    backgroundColor: Colors.black,
 
     display: 'flex',
   },
+  fixed: {
+    position: 'fixed',
+    top: 0,
+  },
   item: {
-    color: '#ffca42',
+    color: Colors.primary,
     textDecoration: 'none',
     fontWeight: 'bold',
     userSelect: 'none',
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
   link: {
     cursor: 'pointer',
     ':hover': {
-      color: '#f0ad00',
+      color: Colors.primaryDarker,
     },
   },
   logo: {
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
 class Setup extends Component {
   render() {
     return (
-      <nav id="Navbar" className={css(styles.nav)} aria-label="main navigation">
+      <nav id="Navbar" className={css(styles.nav, styles.fixed)} aria-label="main navigation">
         <span className={css(styles.item, styles.logo, styles.lastOnLeft)}>EasyGarlic</span>
         <Link className={css(styles.item, styles.link)} to="/">Mining</Link>
         <Link className={css(styles.item, styles.link)} to="/miners">Miners</Link>
