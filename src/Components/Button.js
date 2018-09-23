@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     marginTop: '0.5em',
     marginBottom: '0.5em',
     padding: '2px 1em',
-    backgroundColor: 'hsl(0,0%,98%)',
-    color: 'hsl(0,0%,50%)',
+    backgroundColor: 'white',
+    color: Colors.textBlack,
     fontSize: '1em',
     fontWeight: 'bold',
     textDecoration: 'none',
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     boxSizing: 'border-box',
     ':hover': {
       borderColor: 'hsl(0,0%,70%)',
+      backgroundColor: 'hsl(0,0%,98%)',
     },
     ':focus': {
       borderColor: Colors.primary,
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.primaryLighter,
     ':hover': {
       borderColor: Colors.primaryDarker,
+      backgroundColor: Colors.primary,
     },
     ':focus': {
       borderColor: Colors.primaryDarker,
@@ -50,6 +52,9 @@ const styles = StyleSheet.create({
   big: {
     padding: '0.5em 1.5em',
     fontSize: '1.25em',
+  },
+  inline: {
+    display: 'inline',
   },
 });
 
@@ -73,7 +78,7 @@ class Button extends Component {
     if (type === 'submit') {
       return (
         <input
-          className={`${className} ${css(styles.button, variantArray.map(v => styles[v]))}`}
+          className={`${css(styles.button, variantArray.map(v => styles[v]))} ${className} `}
           id={id}
           type="submit"
           name={id}
@@ -84,7 +89,7 @@ class Button extends Component {
     }
     return (
       <button
-        className={`${className} ${css(styles.button, variantArray.map(v => styles[v]))}`}
+        className={`${css(styles.button, variantArray.map(v => styles[v]))} ${className}`}
         id={id}
         type="submit"
         name={id}
@@ -102,9 +107,9 @@ Button.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['submit', 'button', 'link']).isRequired,
   variant: PropTypes.oneOfType([
-    PropTypes.string,
+    PropTypes.oneOf(['primary', 'secondary', 'big']),
     PropTypes.arrayOf(
-      PropTypes.oneOf(['primary', 'secondary', 'big']),
+      PropTypes.oneOf(['primary', 'secondary', 'big', 'inline']),
     ),
   ]),
   onClick: PropTypes.func,

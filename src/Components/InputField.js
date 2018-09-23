@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginBottom: '0.5em',
     padding: '2px 8px',
     backgroundColor: 'hsl(0,0%,98%)',
-    color: 'hsl(0,0%,50%)',
+    color: Colors.textBlack,
     fontSize: '1em',
     borderColor: 'hsl(0,0%,80%)',
     borderRadius: '4px',
@@ -40,8 +40,37 @@ const styles = StyleSheet.create({
 });
 
 class InputField extends Component {
+  static getDerivedStateFromProps(nextProps, previousState) {
+    if (nextProps.value !== previousState.value) {
+      return { value: nextProps.value };
+    }
+    return null;
+  }
+
+  constructor(props) {
+    super(props);
+    const { value } = props;
+    this.state = {
+      value,
+    };
+    this.handleChangeValue = this.handleChangeValue.bind(this);
+  }
+
+  /**
+   * Called when the value of the input field is changed
+   * @param {Event} e The event object from the change event
+   */
+  handleChangeValue(e) {
+    const { onChange } = this.props;
+    // Update the state value of the field
+    this.setState({ value: e.target.value });
+    // Call the onChange prop
+    onChange(e.target.value);
+  }
+
   render() {
-    const { id, label, onChange } = this.props;
+    const { id, label } = this.props;
+    const { value } = this.state;
     return (
       <div className={css(styles.inputField)}>
         <label className={css(styles.label)} htmlFor={id}>{label}</label>
@@ -51,7 +80,8 @@ class InputField extends Component {
           type="text"
           name={id}
           autoComplete="off"
-          onChange={onChange}
+          value={value}
+          onChange={this.handleChangeValue}
         />
       </div>
     );
@@ -61,11 +91,13 @@ class InputField extends Component {
 InputField.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func,
 };
 
 InputField.defaultProps = {
   onChange: () => {},
+  value: '',
 };
 
 export default InputField;

@@ -10,7 +10,23 @@ const store = new ElectronStore();
  */
 function getMiners() {
   const miners = store.get('miners', []);
-  return miners.map(miner => new Miner(miner.platform, miner.device, miner.brand));
+  console.log(miners);
+  return miners.map(
+    miner => new Miner(
+      miner.platform,
+      miner.device, miner.brand,
+      miner.options,
+      miner.installPath,
+    ),
+  );
+}
+
+/**
+ * Replaces the current miners array with an new one
+ * @param {Array<Miner>} miners The new miners array
+ */
+function setMiners(miners) {
+  store.set('miners', miners);
 }
 
 /**
@@ -28,5 +44,6 @@ function addMiner(miner) {
 
 export default {
   getMiners,
+  setMiners,
   addMiner,
 };

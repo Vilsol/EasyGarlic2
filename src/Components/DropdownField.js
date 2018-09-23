@@ -36,7 +36,7 @@ const customStyles = {
 class DropdownField extends Component {
   render() {
     const {
-      id, label, onChange, options,
+      id, label, onChange, options, isMulti, defaultIndex,
     } = this.props;
     return (
       <div className={css(styles.inputField)}>
@@ -45,10 +45,11 @@ class DropdownField extends Component {
           className={css(styles.input)}
           id={id}
           name={id}
-          isMulti
+          isMulti={isMulti}
           styles={customStyles}
           options={options}
           onChange={onChange}
+          defaultOption={defaultIndex === false ? 'false' : options[defaultIndex]}
         />
       </div>
     );
@@ -63,10 +64,14 @@ DropdownField.propTypes = {
     value: PropTypes.any.isRequired,
     label: PropTypes.string.isRequired,
   })).isRequired,
+  isMulti: PropTypes.bool,
+  defaultIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 };
 
 DropdownField.defaultProps = {
   onChange: () => {},
+  isMulti: false,
+  defaultIndex: false,
 };
 
 export default DropdownField;

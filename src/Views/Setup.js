@@ -19,7 +19,7 @@ class Setup extends Component {
     super(props);
 
     this.state = {
-      options: UserData.getMiners().map(miner => ({ value: miner, label: miner.name() })),
+      options: UserData.getMiners().map(miner => ({ value: miner, label: miner.name })),
       message: '',
     };
 
@@ -46,7 +46,7 @@ class Setup extends Component {
         <form>
           <InputField id="mining-address" label="Address" />
           <InputField id="mining-pool" label="Pool" />
-          <DropdownField id="mining-miners" label="Miners" options={options} onChange={this.handleDropdownChange} />
+          <DropdownField id="mining-miners" label="Miners" options={options} isMulti onChange={this.handleDropdownChange} />
           <Button className={css(styles.formItem)} id="mining-submit" type="submit" label="Start" variant={['primary', 'big']} onClick={this.startMiners} />
         </form>
         { message

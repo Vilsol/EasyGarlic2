@@ -33,9 +33,6 @@ const styles = StyleSheet.create({
       color: Colors.primaryDarker,
     },
   },
-  logo: {
-    cursor: 'default',
-  },
   lastOnLeft: {
     marginRight: 'auto',
   },
@@ -45,7 +42,7 @@ class Setup extends Component {
   render() {
     return (
       <nav id="Navbar" className={css(styles.nav, styles.fixed)} aria-label="main navigation">
-        <span className={css(styles.item, styles.logo, styles.lastOnLeft)}>EasyGarlic</span>
+        <Link className={css(styles.item, styles.link, styles.lastOnLeft)} to="/">EasyGarlic</Link>
         <Link className={css(styles.item, styles.link)} to="/">Mining</Link>
         <Link className={css(styles.item, styles.link)} to="/miners">Miners</Link>
         <Link className={css(styles.item, styles.link)} to="/settings">Settings</Link>

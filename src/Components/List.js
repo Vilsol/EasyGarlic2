@@ -69,12 +69,12 @@ class List extends Component {
            */
           onClickItem
             ? (
-              <button className={css(styles.listItemContent, styles.listItemLink)} type="button" onClick={this.clickItemHandler}>
+              <button className={css(styles.listItemContent, styles.listItemLink)} type="button" value={item.value} onClick={this.clickItemHandler}>
                 {item.label}
               </button>
             )
             : (
-              <span className={css(styles.listItemContent)}>
+              <span className={css(styles.listItemContent)} value={item.label}>
                 {item.label}
               </span>
             )
@@ -84,8 +84,8 @@ class List extends Component {
 
     return (
       isOrdered
-        ? (<ul className={`${className} ${css(styles.list)}`}>{listContent}</ul>)
-        : (<ol className={`${className} ${css(styles.list)}`}>{listContent}</ol>)
+        ? (<ul className={`${css(styles.list)} ${className}`}>{listContent}</ul>)
+        : (<ol className={`${css(styles.list)} ${className}`}>{listContent}</ol>)
     );
   }
 }

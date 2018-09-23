@@ -21,7 +21,7 @@ class ActionHeader extends Component {
       className, title, buttonId, buttonLabel, onClick,
     } = this.props;
     return (
-      <div className={`${className} ${css(styles.container)}`}>
+      <div className={`${css(styles.container)} ${className} `}>
         <h1>{title}</h1>
         <Button className={css(styles.button)} id={buttonId} label={buttonLabel} type="button" variant="primary" onClick={onClick} />
       </div>

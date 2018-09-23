@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { css, StyleSheet } from 'aphrodite';
 
+import { Colors } from 'Config';
 import Navbar from 'Components/Navbar';
 
 const styles = StyleSheet.create({
   main: {
     marginTop: '3em',
     padding: '1em',
+    color: Colors.textBlack,
   },
 });
 

@@ -8,6 +8,8 @@ const Colors = {
   primaryDarker: '#f0ad00',
   // GitHub Black
   black: '#24292e',
+  // Text Black
+  textBlack: '#333',
   // React-Select Hover Blue
   hoverBlue: '#DEEBFF',
   // React-Select Click/Select Blue
