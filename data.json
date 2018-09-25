@@ -1,0 +1,16 @@
+{
+  "miners": {
+    "windows_gpu_nvidia": {
+      "platform": "windows",
+      "type": "gpu",
+      "brand": "nvidia",
+      "url": "https://url.to/miner_nvidia.exe"
+    },
+    "windows_gpu_amd": {
+      "platform": "windows",
+      "type": "gpu",
+      "brand": "AMD",
+      "url": "https://url.to/miner_amd.exe"
+    }
+  }
+}

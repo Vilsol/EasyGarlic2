@@ -6,23 +6,29 @@
  */
 class Miner {
   /**
+   * Create a Miner Object from a given JS Object
+   * @param {Object} data The Object to create the Miner from
+   */
+  static fromObject(data) {
+    if (!data) {
+      throw new Error('Data is null!');
+    }
+    return new Miner(data.device, data.options, data.name, data.installPath);
+  }
+
+  // TODO: Might want to make a system so that miners have a their own custom "id" in case I want multiple miner types for the same device type (e.g multiple Windows AMD GPU miners)
+  /**
    * Create a new Miner Object
-   * @param {string} platform The platform that this miner runs on.
-   * @param {string} type The type of device that this miner uses e.g. GPU, CPU
-   * @param {string} brand The brand of the device that this miner uses e.g. Nvidia, AMD, Intel
-   * @param {string} device The device UUID that this miner uses on this computer
+   * @param {Device} device The device that this miner uses on this computer
    * @param {MinerOptions} options The MinerOptions to use for this miner.
    * @param {string} [name] (optional) The name used to identify this miner.
    * @param {string} [installPath] (optional) The location where this miner is installed.
    */
-  constructor(platform, type, brand, device, options, name, installPath) {
-    if (!platform || !type || !brand || !device || !options) {
+  constructor(device, options, name, installPath) {
+    if (!device || !options) {
       throw new Error('Missing parameters for Miner object');
     }
 
-    this.platform = platform;
-    this.type = type;
-    this.brand = brand;
     this.device = device;
     this.options = options;
     // TODO: Make better system for install path when user wants mutliple miners of same type
@@ -33,27 +39,12 @@ class Miner {
   }
 
   getDefaultInstallPath() {
-    return `/${this.platform}/${this.type}/${this.brand}`;
+    const { platform, type, brand } = this.device;
+    return `/${platform}/${type}/${brand}`;
   }
 
   getDefaultName() {
-    // Make platform's first letter uppercase (windows -> Windows)
-    const platformName = this.platform.replace(/^\w/, c => c.toUpperCase());
-
-    // Set names based on brand (nvidia -> Nvidia, amd -> AMD, etc.)
-    let brandName = this.brand;
-    if (this.brand === 'nvidia') {
-      brandName = 'Nvidia';
-    } else if (this.brand === 'amd') {
-      brandName = 'AMD';
-    } else if (this.brand === 'intel') {
-      brandName = 'Intel';
-    }
-
-    // device type is always capitalized (cpu -> CPU, GPU -> GPU)
-    const typeName = this.type.toUpperCase();
-
-    return `${platformName} ${brandName} ${typeName}`;
+    return this.device.getName();
   }
 
   getCommand() {

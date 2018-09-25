@@ -1,4 +1,6 @@
 import Miner from 'Controllers/Miner';
+import Device from './Device';
+import MinerOptions from './MinerOptions';
 
 const ElectronStore = window.require('electron-store');
 
@@ -12,14 +14,12 @@ function getMiners() {
   const miners = store.get('miners', []);
   console.log(miners);
   return miners.map(
-    miner => new Miner(
-      miner.platform,
-      miner.type,
-      miner.brand,
-      miner.device,
-      miner.options,
-      miner.name,
-    ),
+    miner => Miner.fromObject({
+      device: Device.fromObject(miner.device),
+      options: MinerOptions.fromObject(miner.options),
+      name: miner.name,
+      installPath: miner.installPath,
+    }),
   );
 }
 
