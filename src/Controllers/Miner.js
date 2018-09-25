@@ -8,27 +8,32 @@ class Miner {
   /**
    * Create a new Miner Object
    * @param {string} platform The platform that this miner runs on.
-   * @param {string} device The device that this miner uses e.g. GPU, CPU
-   * @param {string} brand The brand of the miner e.g. Nvidia, AMD, Intel
+   * @param {string} type The type of device that this miner uses e.g. GPU, CPU
+   * @param {string} brand The brand of the device that this miner uses e.g. Nvidia, AMD, Intel
+   * @param {string} device The device UUID that this miner uses on this computer
    * @param {MinerOptions} options The MinerOptions to use for this miner.
-   * @param {string} [installPath] (optional) The path at which this miner is installed.
-   * @param {string} [name] The name used to identify this miner.
+   * @param {string} [name] (optional) The name used to identify this miner.
+   * @param {string} [installPath] (optional) The location where this miner is installed.
    */
-  constructor(platform, device, brand, options, installPath, name) {
-    if (!platform || !device || !brand || !options) {
+  constructor(platform, type, brand, device, options, name, installPath) {
+    if (!platform || !type || !brand || !device || !options) {
       throw new Error('Missing parameters for Miner object');
     }
 
     this.platform = platform;
-    // TODO: Replace device to "type" and set device to the UUID of the actual device
-    this.device = device;
+    this.type = type;
     this.brand = brand;
+    this.device = device;
     this.options = options;
-    // TODO: Make a default install path? Or something to check for this, maybe set it as required
-    this.installPath = installPath || '';
+    // TODO: Make better system for install path when user wants mutliple miners of same type
+    this.installPath = installPath || this.getDefaultInstallPath();
 
     // Set the name to default until changed by user
     this.name = name || this.getDefaultName();
+  }
+
+  getDefaultInstallPath() {
+    return `/${this.platform}/${this.type}/${this.brand}`;
   }
 
   getDefaultName() {
@@ -46,9 +51,9 @@ class Miner {
     }
 
     // device type is always capitalized (cpu -> CPU, GPU -> GPU)
-    const deviceName = this.device.toUpperCase();
+    const typeName = this.type.toUpperCase();
 
-    return `${platformName} ${brandName} ${deviceName}`;
+    return `${platformName} ${brandName} ${typeName}`;
   }
 
   getCommand() {

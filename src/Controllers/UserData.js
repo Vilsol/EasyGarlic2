@@ -14,9 +14,11 @@ function getMiners() {
   return miners.map(
     miner => new Miner(
       miner.platform,
-      miner.device, miner.brand,
+      miner.type,
+      miner.brand,
+      miner.device,
       miner.options,
-      miner.installPath,
+      miner.name,
     ),
   );
 }

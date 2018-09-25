@@ -31,9 +31,11 @@ class MinerSettings extends Component {
   constructor(props) {
     super(props);
     const { miner } = props;
+    const clone = cloneDeep(miner);
     this.state = {
       // Make a deep clone of the miner value so that it doesn't auto-update the settings
-      minerValue: cloneDeep(miner),
+      minerValue: clone,
+      selectedDevice: { label: `${clone.brand.toUpperCase()} ${clone.type.toUpperCase()}`, value: { brand: clone.brand, type: clone.type } },
     };
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeDevice = this.handleChangeDevice.bind(this);
@@ -63,15 +65,15 @@ class MinerSettings extends Component {
     // Whether or not the current miner is using the default name
     const isUsingDefaultName = (minerValue.name === minerValue.getDefaultName());
 
-    // Change the device and brand
-    minerValue.device = value.device;
+    // Change the type and brand
+    minerValue.type = value.type;
     minerValue.brand = value.brand;
     // If it previously used the default name, update it to reflect changes
     if (isUsingDefaultName) {
       minerValue.name = minerValue.getDefaultName();
     }
 
-    this.setState({ minerValue });
+    this.setState({ minerValue, selectedDevice: pair });
   }
 
   /**
@@ -99,16 +101,18 @@ class MinerSettings extends Component {
   handleResetButton() {
     // Re-clone from props
     const { miner } = this.props;
-    this.setState({ minerValue: cloneDeep(miner) });
+    const clone = cloneDeep(miner);
+    // TODO: Get label/value pair from clone values
+    this.setState({ minerValue: clone, selectedDevice: { label: `${clone.brand.toUpperCase()} ${clone.type.toUpperCase()}`, value: { brand: clone.brand, type: clone.type } } });
   }
 
   render() {
     const { className } = this.props;
-    const { minerValue } = this.state;
+    const { minerValue, selectedDevice } = this.state;
     // TODO: Make system to analyze available devices (nvidia gpu, intel cpu, etc...)
     const deviceOptions = [
-      { value: { brand: 'amd', device: 'gpu' }, label: 'AMD GPU' },
-      { value: { brand: 'nvidia', device: 'gpu' }, label: 'Nvidia GPU' },
+      { value: { brand: 'amd', type: 'gpu' }, label: 'AMD GPU' },
+      { value: { brand: 'nvidia', type: 'gpu' }, label: 'Nvidia GPU' },
     ];
     return (
       <div className={`${css(styles.container)} ${className}`}>
@@ -116,7 +120,7 @@ class MinerSettings extends Component {
           <h2 className={css(styles.title)}>{minerValue.name}</h2>
           <InputField id="miner-name" label="Name" value={minerValue.name} onChange={this.handleChangeName} />
           {/* TODO: Change defaultOption from 0 to whichever value is selected in the deviceOptions so that it autosets */}
-          <DropdownField id="miner-device" label="Device" options={deviceOptions} onChange={this.handleChangeDevice} defaultIndex={0} />
+          <DropdownField id="miner-device" label="Device" options={deviceOptions} onChange={this.handleChangeDevice} value={selectedDevice} />
           <div>
             <Button className={css(styles.actionButton)} id="save" label="Save" type="submit" variant={['primary', 'inline']} onClick={this.handleSaveButton} />
             <Button className={css(styles.actionButton)} id="reset" label="Reset" type="button" variant={['secondary', 'inline']} onClick={this.handleResetButton} />

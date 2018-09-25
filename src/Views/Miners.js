@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { css, StyleSheet } from 'aphrodite';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
 
 import UserData from 'Controllers/UserData';
 import ActionHeader from 'Components/ActionHeader';
@@ -71,10 +72,11 @@ class Miners extends Component {
 
   render() {
     const { miners, selected } = this.state;
-    return (
-      <div id="Miners">
-        { /* TODO: Remove the Action Header and move the "Add New" button to the end of the list, don't make a new page, just add one to the list and open it as selected */}
-        <ActionHeader title="Miners" buttonId="add-miner" buttonLabel="Add New" onClick={this.addNewMinerHandler} />
+    let content;
+    if (isEmpty(miners)) {
+      content = (<p>No miners are installed... Click Add New to install a new one.</p>);
+    } else {
+      content = (
         <div className={css(styles.container)}>
           <List
             className={css(styles.listPanel)}
@@ -88,6 +90,13 @@ class Miners extends Component {
             onSave={this.handleSaveMiner}
           />
         </div>
+      );
+    }
+    return (
+      <div id="Miners">
+        { /* TODO: Remove the Action Header and move the "Add New" button to the end of the list, don't make a new page, just add one to the list and open it as selected */}
+        <ActionHeader title="Miners" buttonId="add-miner" buttonLabel="Add New" onClick={this.addNewMinerHandler} />
+        {content}
       </div>
     );
   }

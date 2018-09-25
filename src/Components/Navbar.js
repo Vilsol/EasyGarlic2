@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Setup extends Component {
+class Navigation extends Component {
   render() {
     return (
       <nav id="Navbar" className={css(styles.nav, styles.fixed)} aria-label="main navigation">
@@ -51,4 +51,4 @@ class Setup extends Component {
   }
 }
 
-export default Setup;
+export default Navigation;
