@@ -4,17 +4,6 @@
  */
 class Device {
   /**
-   * Create a Device Object from a given JS Object
-   * @param {Object} data The Object to create the Device from
-   */
-  static fromObject(data) {
-    if (!data) {
-      throw new Error('Data is null!');
-    }
-    return new Device(data.platform, data.type, data.brand, data.uuid);
-  }
-
-  /**
    * Create a new Miner Object
    * @param {string} platform The platform that this miner runs on.
    * @param {string} type The type of device that this miner uses e.g. GPU, CPU

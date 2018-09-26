@@ -4,17 +4,6 @@
  */
 class MinerOptions {
   /**
-   * Create a MinerOptions Object from a given JS Object
-   * @param {Object} data The Object to create the MinerOptions from
-   */
-  static fromObject(data) {
-    if (!data) {
-      throw new Error('Data is null!');
-    }
-    return new MinerOptions(data.algorithm, data.intensity, data.parameters);
-  }
-
-  /**
    * Create a new MinerOptions Object
    * @param {string} algorithm The algorithm to use for mining.
    * @param {string} [intensity] (optional) The intensity at which to mine.

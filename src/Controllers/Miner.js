@@ -6,18 +6,6 @@
  */
 class Miner {
   /**
-   * Create a Miner Object from a given JS Object
-   * @param {Object} data The Object to create the Miner from
-   */
-  static fromObject(data) {
-    if (!data) {
-      throw new Error('Data is null!');
-    }
-    return new Miner(data.device, data.options, data.name, data.installPath);
-  }
-
-  // TODO: Might want to make a system so that miners have a their own custom "id" in case I want multiple miner types for the same device type (e.g multiple Windows AMD GPU miners)
-  /**
    * Create a new Miner Object
    * @param {Device} device The device that this miner uses on this computer
    * @param {MinerOptions} options The MinerOptions to use for this miner.
@@ -36,6 +24,14 @@ class Miner {
 
     // Set the name to default until changed by user
     this.name = name || this.getDefaultName();
+  }
+
+  getId() {
+    /**
+     * TODO: Might want to add another variable because there might be multiple miner types
+     * for the same device type (e.g multiple Windows AMD GPU miners)
+     */
+    return this.device.getId();
   }
 
   getDefaultInstallPath() {

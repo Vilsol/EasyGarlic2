@@ -14,12 +14,19 @@ function getMiners() {
   const miners = store.get('miners', []);
   console.log(miners);
   return miners.map(
-    miner => Miner.fromObject({
-      device: Device.fromObject(miner.device),
-      options: MinerOptions.fromObject(miner.options),
-      name: miner.name,
-      installPath: miner.installPath,
-    }),
+    miner => new Miner(
+      new Device(
+        miner.device.platform,
+        miner.device.type,
+        miner.device.brand,
+        miner.device.uuid,
+      ),
+      new MinerOptions(
+        miner.options.algorithm,
+      ),
+      miner.name,
+      miner.installPath,
+    ),
   );
 }
 
