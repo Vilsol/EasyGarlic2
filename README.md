@@ -1,3 +1,9 @@
+# Discontinued
+
+Sorry, this project is now discontinued. I found out that reporting information between nodejs/electron and the gpu is a very big task that I am currently unable to work on.
+If you have experience in this, please submit a PR and I might get back to working on this.
+There are just so many different possibilities with the different devices and platforms and I don't see this happening for the time being.
+
 # EasyGarlic v2
 
 GUI Miner for Garlicoin.
