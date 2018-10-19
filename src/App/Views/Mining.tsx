@@ -1,13 +1,13 @@
 import React from 'react';
 
-class Home extends React.Component {
+class Mining extends React.Component {
   public render() {
     return (
-      <div className="Home">
+      <div className="Mining">
         <p>Hello World</p>
       </div>
     );
   }
 }
 
-export default Home;
+export default Mining;

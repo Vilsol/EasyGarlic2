@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Home from 'App/Home/Home';
+import App from 'App/App';
+import Miners from 'App/Views/Miners';
+import Mining from 'App/Views/Mining';
 
 class Router extends Component {
   public render() {
     return (
       <BrowserRouter>
-        <Route exact={true} path="/" component={Home} />
+        <App>
+          <Route exact={true} path="/" component={Mining} />
+          <Route exact={true} path="/miners" component={Miners} />
+        </App>
       </BrowserRouter>
     );
   }

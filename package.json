@@ -7,6 +7,7 @@
   "homepage": "./",
   "dependencies": {
     "aphrodite": "^2.2.3",
+    "color": "^3.1.0",
     "electron-is-dev": "^1.0.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -25,6 +26,7 @@
     "electron-pack": "build --em.main=build/electron.js"
   },
   "devDependencies": {
+    "@types/color": "^3.0.0",
     "@types/electron-is-dev": "^0.3.0",
     "@types/jest": "^23.3.5",
     "@types/node": "^10.12.0",
