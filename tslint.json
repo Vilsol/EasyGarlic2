@@ -10,6 +10,9 @@
   "rules": {
     "no-console": {
       "severity": "warning"
+    },
+    "no-null-keyword": {
+      "severity": "warning"
     }
   }
 }

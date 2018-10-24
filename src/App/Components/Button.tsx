@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
       backgroundColor: Colors.primaryDarker,
       borderColor: Colors.primaryDarker,
     },
+    ':disabled': {
+      backgroundColor: `${Colors.primaryLighter} !important`,
+      borderColor: `${Colors.primaryLighter} !important`,
+    },
     ':focus': {
       borderColor: Colors.primaryDarker,
     },
@@ -64,13 +68,14 @@ const styles = StyleSheet.create({
 
 interface IButtonProps {
   className?: string;
+  disabled?: boolean;
   id: string;
   label?: string;
   type: 'submit' | 'button' | 'link';
   variant:
     | ('primary' | 'secondary' | 'big')
     | Array<'primary' | 'secondary' | 'big'>;
-  onClick: (
+  onClick?: (
     e: React.MouseEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
@@ -78,11 +83,13 @@ interface IButtonProps {
 class Button extends React.Component<IButtonProps> {
   public static defaultProps: Partial<IButtonProps> = {
     className: '',
+    disabled: false,
+    onClick: undefined,
     variant: 'secondary',
   };
 
   public render() {
-    const { className, id, label, type, variant } = this.props;
+    const { className, disabled, id, label, type, variant } = this.props;
     const variantArray = typeof variant === 'string' ? [variant] : variant;
     if (type === 'submit') {
       return (
@@ -96,6 +103,7 @@ class Button extends React.Component<IButtonProps> {
           name={id}
           onClick={this.clickHandler}
           value={label}
+          disabled={disabled}
         />
       );
     }
@@ -109,6 +117,7 @@ class Button extends React.Component<IButtonProps> {
         type="submit"
         name={id}
         onClick={this.clickHandler}
+        disabled={disabled}
       >
         {label}
       </button>
@@ -118,9 +127,11 @@ class Button extends React.Component<IButtonProps> {
   private clickHandler = (
     e: React.MouseEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
-    e.preventDefault();
     const { onClick } = this.props;
-    onClick(e);
+    if (onClick !== undefined) {
+      e.preventDefault();
+      onClick(e);
+    }
   };
 }
 
