@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import App from 'App/App';
-import Miners from 'App/Views/Miners';
+import Miners from 'App/Views/Miners/Miners';
 import Mining from 'App/Views/Mining';
 
 class Router extends Component {
