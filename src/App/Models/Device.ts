@@ -2,17 +2,26 @@
  * Type of Mining Devices
  */
 enum DeviceType {
-  cpu,
-  gpu,
+  cpu = 'cpu',
+  gpu = 'gpu',
 }
 
 /**
  * Brands of Mining Brands
  */
 enum DeviceBrand {
-  nvidia,
-  amd,
-  intel,
+  nvidia = 'nvidia',
+  amd = 'amd',
+  intel = 'intel',
+}
+
+/**
+ * Operating System/Platform of Mining Device
+ */
+enum DevicePlatform {
+  windows = 'windows',
+  macos = 'macos',
+  linux = 'linux',
 }
 
 /**
@@ -21,15 +30,18 @@ enum DeviceBrand {
 class Device {
   public type: DeviceType;
   public brand: DeviceBrand;
+  public platform: DevicePlatform;
 
   /**
    * Create a new Device object.
    * @param type Type of this device.
    * @param brand Brand of this device.
+   * @param platform Platform of this device.
    */
-  constructor(type: DeviceType, brand: DeviceBrand) {
+  constructor(type: DeviceType, brand: DeviceBrand, platform: DevicePlatform) {
     this.type = type;
     this.brand = brand;
+    this.platform = platform;
   }
 
   /**
@@ -57,7 +69,18 @@ class Device {
         return 'Intel';
     }
   }
+
+  public getFormattedPlatform(): string {
+    switch (this.platform) {
+      case DevicePlatform.windows:
+        return 'Windows';
+      case DevicePlatform.macos:
+        return 'macOS';
+      case DevicePlatform.linux:
+        return 'Linux';
+    }
+  }
 }
 
 export default Device;
-export { DeviceType, DeviceBrand };
+export { DeviceType, DeviceBrand, DevicePlatform };

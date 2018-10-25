@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
       backgroundColor: Colors.primaryDarker,
       borderColor: Colors.primaryDarker,
     },
+    // TODO: Fix issue where :disabled is overriden by :hover, :active, and :focus. But aphrodite doesn't support multi-selector CSS
     ':disabled': {
       backgroundColor: `${Colors.primaryLighter} !important`,
       borderColor: `${Colors.primaryLighter} !important`,

@@ -5,6 +5,13 @@ import MinerOptions from './MinerOptions';
  * Stores non-runtime data of a miner.
  */
 class Miner {
+  public static ObjectToMiner(miner: any): Miner {
+    return new Miner(
+      miner.name,
+      new Device(miner.device.type, miner.device.brand, miner.device.platform),
+      miner.installPath
+    );
+  }
   /**
    * Name of this miner.
    */

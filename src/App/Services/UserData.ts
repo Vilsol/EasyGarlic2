@@ -1,16 +1,20 @@
 import Miner from 'App/Models/Miner';
 import ElectronStore from 'electron-store';
 
+// Weird TypeScript require because window.require doesn't exist
+const es = (window as any).require('electron-store') as typeof ElectronStore;
+
 // Need to require from electron in very strange way because electron :(
-const store = (window as any).require('electron-store')() as ElectronStore;
+const store: ElectronStore = new es();
+
+// TODO: Perhaps find a way to cache the store? idk fam
 
 /**
  * Get an array of Miners that are in the User Data Store.
  */
 function getMiners(): Miner[] {
   const miners: Miner[] = store.get('miners', []);
-  console.log(miners);
-  return miners;
+  return miners.map(miner => Miner.ObjectToMiner(miner));
 }
 
 /**

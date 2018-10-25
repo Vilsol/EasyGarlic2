@@ -2,8 +2,8 @@ import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
 import List, { IListItem } from 'App/Components/List';
-import Device, { DeviceBrand, DeviceType } from 'App/Models/Device';
 import Miner from 'App/Models/Miner';
+import UserData from 'App/Services/UserData';
 import MinerPanel from './Views/MinerPanel';
 
 const styles = StyleSheet.create({
@@ -23,25 +23,8 @@ interface IMinersState {
   selectedMiner: number;
 }
 
-// TODO: Make this auto-fetch miners list
 const initialState: IMinersState = {
-  miners: [
-    new Miner(
-      'Test Miner',
-      new Device(DeviceType.gpu, DeviceBrand.nvidia),
-      'ayy'
-    ),
-    new Miner(
-      'Test1Miner',
-      new Device(DeviceType.gpu, DeviceBrand.nvidia),
-      'ayy'
-    ),
-    new Miner(
-      'Test2Miner',
-      new Device(DeviceType.gpu, DeviceBrand.nvidia),
-      'ayy'
-    ),
-  ],
+  miners: UserData.getMiners(),
   selectedMiner: 0,
 };
 
@@ -52,13 +35,12 @@ class Miners extends React.Component<{}, IMinersState> {
     const { miners, selectedMiner } = this.state;
 
     // Create the list of miners for the List object
-    const listOfMiners: IListItem[] = miners.map(
-      miner =>
-        ({
-          label: miner.name,
-          value: miner.getId(),
-        } as IListItem)
-    );
+    const listOfMiners: IListItem[] = miners.map(miner => {
+      return {
+        label: miner.name,
+        value: miner.getId(),
+      } as IListItem;
+    });
 
     return (
       <div className={`Miners ${css(styles.container)}`}>
@@ -94,9 +76,10 @@ class Miners extends React.Component<{}, IMinersState> {
    * @param miner The new miner object with its modified settings.
    */
   private handleSaveMinerSettings = (miner: Miner) => {
-    // TODO: Update the miner list
-    console.log('Update list!');
-    console.log(miner);
+    const { miners, selectedMiner } = this.state;
+    miners[selectedMiner] = Miner.ObjectToMiner(miner);
+    UserData.setMiners(miners);
+    this.setState({ miners });
   };
 }
 

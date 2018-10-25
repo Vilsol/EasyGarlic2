@@ -1,8 +1,9 @@
 import { css, StyleSheet } from 'aphrodite';
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import React from 'react';
 
 import Button from 'App/Components/Button';
+import InputField from 'App/Components/InputField';
 import Miner from 'App/Models/Miner';
 
 const styles = StyleSheet.create({
@@ -48,10 +49,20 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
     const { className } = this.props;
     const { miner } = this.state;
 
-    const formRendering = () => (
+    const formRendering = ({
+      values,
+      handleBlur,
+      handleChange,
+    }: FormikProps<Miner>) => (
       <Form>
-        <label htmlFor="name">Name</label>
-        <Field type="name" name="name" />
+        <InputField
+          id="name"
+          label="Name"
+          type="text"
+          value={values.name}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
         <Button id="saveButton" type="button" label="Save" variant="primary" />
       </Form>
     );
