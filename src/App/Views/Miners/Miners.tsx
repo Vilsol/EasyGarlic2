@@ -1,7 +1,8 @@
 import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
-import List, { IListItem } from 'App/Components/List';
+import IEnumerableItem from 'App/Components/IEnumerableItem';
+import List from 'App/Components/List';
 import Miner from 'App/Models/Miner';
 import UserData from 'App/Services/UserData';
 import MinerPanel from './Views/MinerPanel';
@@ -35,11 +36,11 @@ class Miners extends React.Component<{}, IMinersState> {
     const { miners, selectedMiner } = this.state;
 
     // Create the list of miners for the List object
-    const listOfMiners: IListItem[] = miners.map(miner => {
+    const listOfMiners: IEnumerableItem[] = miners.map(miner => {
       return {
         label: miner.name,
         value: miner.getId(),
-      } as IListItem;
+      } as IEnumerableItem;
     });
 
     return (

@@ -1,17 +1,22 @@
 import { css, StyleSheet } from 'aphrodite';
 import { Form, Formik, FormikProps } from 'formik';
 import React from 'react';
+import { ValueType } from 'react-select/lib/types';
 
 import Button from 'App/Components/Button';
+import DropdownField from 'App/Components/DropdownField';
+import IEnumerableItem from 'App/Components/IEnumerableItem';
 import InputField from 'App/Components/InputField';
+import Device from 'App/Models/Device';
 import Miner from 'App/Models/Miner';
+import { getAllDevices, getDeviceWithId } from 'App/Services/DeviceManager';
 
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 0,
     paddingLeft: '1em',
     paddingRight: '1em',
-    paddingTop: 0,
+    paddingTop: '0.5em',
   },
   title: {
     marginTop: 0,
@@ -53,19 +58,84 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
       values,
       handleBlur,
       handleChange,
-    }: FormikProps<Miner>) => (
-      <Form>
-        <InputField
-          id="name"
-          label="Name"
-          type="text"
-          value={values.name}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-        <Button id="saveButton" type="button" label="Save" variant="primary" />
-      </Form>
-    );
+      setFieldValue,
+      setFieldTouched,
+    }: FormikProps<Miner>) => {
+      // Adapt dropdown events to Formik because react-select uses its event system
+      const handleDropdownChange = (value: ValueType<IEnumerableItem>) => {
+        if (value !== null && !Array.isArray(value)) {
+          // Set value to device corresponding to the given id
+          setFieldValue(
+            'device',
+            value ? getDeviceWithId(value.value) : undefined
+          );
+        }
+      };
+      const handleDropdownBlur = (event: React.FocusEvent<HTMLElement>) => {
+        setFieldTouched('device', document.activeElement === event.target);
+      };
+      // TODO: Might want to add this to the Device class
+      // Convert a device to an enumerable
+      function deviceToEnumerable(device: Device): IEnumerableItem {
+        return {
+          label: device.getName(),
+          value: device.getId(),
+        } as IEnumerableItem;
+      }
+
+      return (
+        <Form>
+          <InputField
+            id="name"
+            label="Name"
+            type="text"
+            value={values.name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <DropdownField
+            id="device"
+            label="Device"
+            onChange={handleDropdownChange}
+            onBlur={handleDropdownBlur}
+            options={getAllDevices().map(deviceToEnumerable)}
+            value={deviceToEnumerable(values.device)}
+            isMulti={false}
+          />
+          <h3>Mining Options</h3>
+          <InputField
+            id="algorithm"
+            label="Algorithm"
+            type="text"
+            value={values.options.algorithm}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <InputField
+            id="intensity"
+            label="Intensity"
+            type="text"
+            value={values.options.intensity}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <InputField
+            id="parameters"
+            label="Custom Parameters"
+            type="text"
+            value={values.options.parameters}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <Button
+            id="saveButton"
+            type="button"
+            label="Save"
+            variant="primary"
+          />
+        </Form>
+      );
+    };
 
     if (miner === undefined) {
       return (
@@ -77,7 +147,7 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
 
     return (
       <div className={`MinerPanel ${className} ${css(styles.container)}`}>
-        <h2 className={css(styles.title)}>{miner.name}</h2>
+        <h1 className={css(styles.title)}>{miner.name}</h1>
         <Formik
           enableReinitialize={true}
           initialValues={miner}

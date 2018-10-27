@@ -44,17 +44,18 @@ const styles = StyleSheet.create({
       backgroundColor: Colors.primaryDarker,
       borderColor: Colors.primaryDarker,
     },
-    // TODO: Fix issue where :disabled is overriden by :hover, :active, and :focus. But aphrodite doesn't support multi-selector CSS
-    ':disabled': {
-      backgroundColor: `${Colors.primaryLighter} !important`,
-      borderColor: `${Colors.primaryLighter} !important`,
-    },
+
     ':focus': {
       borderColor: Colors.primaryDarker,
     },
     ':hover': {
       backgroundColor: Colors.primary,
       borderColor: Colors.primaryDarker,
+    },
+
+    ':disabled': {
+      backgroundColor: `${Colors.primaryLighter} !important`,
+      borderColor: `${Colors.primaryLighter} !important`,
     },
   },
 
@@ -82,7 +83,7 @@ interface IButtonProps {
 }
 
 class Button extends React.Component<IButtonProps> {
-  public static defaultProps: Partial<IButtonProps> = {
+  public static defaultProps = {
     className: '',
     disabled: false,
     onClick: undefined,

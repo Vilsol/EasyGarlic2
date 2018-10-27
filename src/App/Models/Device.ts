@@ -80,6 +80,14 @@ class Device {
         return 'Linux';
     }
   }
+
+  public getName(): string {
+    return `${this.getFormattedPlatform()} ${this.getFormattedBrand()} ${this.getFormattedType()}`;
+  }
+
+  public getId(): string {
+    return `${this.platform}_${this.brand}_${this.type}`;
+  }
 }
 
 export default Device;

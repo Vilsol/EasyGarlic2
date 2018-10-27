@@ -1,6 +1,7 @@
 import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
+import IEnumerableItem from 'App/Components/IEnumerableItem';
 import Colors from 'Models/Colors';
 
 // Styles for the entire form and its content
@@ -43,19 +44,14 @@ const styles = StyleSheet.create({
 
 interface IListProps {
   className?: string;
-  items: IListItem[];
+  items: IEnumerableItem[];
   isOrdered?: boolean;
   onClickItem?: (id: string) => void;
   selectedItem?: number;
 }
 
-interface IListItem {
-  label: string;
-  value: string;
-}
-
 class List extends React.Component<IListProps> {
-  public static defaultProps: Partial<IListProps> = {
+  public static defaultProps = {
     className: '',
     isOrdered: false,
     onClickItem: undefined,
@@ -122,4 +118,3 @@ class List extends React.Component<IListProps> {
 }
 
 export default List;
-export { IListItem };

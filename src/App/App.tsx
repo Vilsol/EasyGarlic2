@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     color: Colors.textBlack,
     // Top needs to be pushed down by the navbar
     marginTop: '3.375em',
-    paddingTop: '1em',
   },
 });
 

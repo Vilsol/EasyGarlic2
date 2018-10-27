@@ -9,6 +9,11 @@ class Miner {
     return new Miner(
       miner.name,
       new Device(miner.device.type, miner.device.brand, miner.device.platform),
+      new MinerOptions(
+        miner.options.algorithm,
+        miner.options.intensity,
+        miner.options.parameters
+      ),
       miner.installPath
     );
   }
@@ -36,11 +41,18 @@ class Miner {
    * Create a new Miner object.
    * @param name Name of this miner
    * @param device Device that this miner should use
+   * @param options Runtime Options that this miner should use
    * @param installPath Path where this miner is installed.
    */
-  constructor(name: string, device: Device, installPath: string) {
+  constructor(
+    name: string,
+    device: Device,
+    options: MinerOptions,
+    installPath: string
+  ) {
     this.name = name;
     this.device = device;
+    this.options = options;
     this.installPath = installPath;
   }
 

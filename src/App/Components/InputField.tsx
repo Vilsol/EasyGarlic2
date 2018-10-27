@@ -33,12 +33,13 @@ const styles = StyleSheet.create({
     outline: '0',
     transition: 'all 100ms',
 
+    ':hover': {
+      borderColor: 'hsl(0,0%,70%)',
+    },
+
     ':focus': {
       borderColor: Colors.primary,
       boxShadow: `0 0 0 1px ${Colors.primary}`,
-    },
-    ':hover': {
-      borderColor: 'hsl(0,0%,70%)',
     },
   },
 });
@@ -53,7 +54,7 @@ interface IInputFieldProps {
 }
 
 class InputField extends React.Component<IInputFieldProps> {
-  public static defaultProps: Partial<IInputFieldProps> = {
+  public static defaultProps = {
     value: '',
   };
 
