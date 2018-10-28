@@ -11,17 +11,18 @@ const styles = StyleSheet.create({
 
   label: {
     display: 'block',
+    paddingTop: '0.375em',
   },
 
   input: {
     display: 'block',
     marginBottom: '0.5em',
-    marginTop: '0.5em',
+    marginTop: '0.125em',
     minHeight: '38px',
     padding: '2px 8px',
     width: '100%',
 
-    backgroundColor: 'hsl(0,0%,98%)',
+    backgroundColor: Colors.inputGrey,
     color: Colors.textBlack,
     fontSize: '1em',
 

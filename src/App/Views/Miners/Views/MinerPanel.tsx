@@ -11,16 +11,22 @@ import Device from 'App/Models/Device';
 import Miner from 'App/Models/Miner';
 import { getAllDevices, getDeviceWithId } from 'App/Services/DeviceManager';
 
+// TODO: Rewrite CSS so that it uses an auto height, but it scrolls when it can't display everything
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 0,
-    paddingLeft: '1em',
-    paddingRight: '1em',
-    paddingTop: 0,
+    display: 'flex',
+    padding: '1.5em',
+  },
+  scrollableContainer: {
+    width: '100%',
 
-    height: '100%',
     'overflow-x': 'hidden',
     'overflow-y': 'auto',
+  },
+  subtitle: {
+    margin: 0,
+    paddingBottom: '0.25em',
+    paddingTop: '0.5em',
   },
   title: {
     marginBottom: '0.25em',
@@ -108,7 +114,7 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
             value={deviceToEnumerable(values.device)}
             isMulti={false}
           />
-          <h3>Mining Options</h3>
+          <h3 className={css(styles.subtitle)}>Mining Options</h3>
           <InputField
             id="algorithm"
             label="Algorithm"
@@ -153,13 +159,15 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
 
     return (
       <div className={`MinerPanel ${className} ${css(styles.container)}`}>
-        <h1 className={css(styles.title)}>{miner.name}</h1>
-        <Formik
-          enableReinitialize={true}
-          initialValues={miner}
-          onSubmit={this.handleSave}
-          render={formRendering}
-        />
+        <div className={css(styles.scrollableContainer)}>
+          <h1 className={css(styles.title)}>{miner.name}</h1>
+          <Formik
+            enableReinitialize={true}
+            initialValues={miner}
+            onSubmit={this.handleSave}
+            render={formRendering}
+          />
+        </div>
       </div>
     );
   }

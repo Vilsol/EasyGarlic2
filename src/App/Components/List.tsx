@@ -7,17 +7,15 @@ import Colors from 'Models/Colors';
 // Styles for the entire form and its content
 const styles = StyleSheet.create({
   list: {
-    borderTop: '1px solid hsl(0,0%,80%)',
     listStyle: 'none',
     margin: 0,
     padding: 0,
   },
-  listItem: {
-    borderBottom: '1px solid hsl(0,0%,80%)',
-  },
+  listItem: {},
   listItemContent: {
     display: 'block',
     padding: '0.5em',
+    paddingLeft: '0.75em',
     textAlign: 'inherit',
     width: 'calc(100% - 0.5em)',
 

@@ -9,15 +9,18 @@ import Colors from 'Models/Colors';
 
 // Styles for the entire form and its content
 const styles = StyleSheet.create({
-  input: {
-    marginBottom: '0.5em',
-    marginTop: '0.5em',
-  },
   inputField: {
     display: 'block',
   },
+
   label: {
     display: 'block',
+    paddingTop: '0.375em',
+  },
+
+  input: {
+    marginBottom: '0.5em',
+    marginTop: '0.125em',
   },
 });
 
@@ -25,9 +28,13 @@ const styles = StyleSheet.create({
 const customStyles: Partial<Styles> = {
   control: (style: React.CSSProperties, { isFocused }): CSSProperties =>
     !isFocused
-      ? style
+      ? {
+          ...style,
+          backgroundColor: Colors.inputGrey,
+        }
       : ({
           ...style,
+          backgroundColor: Colors.inputGrey,
           borderColor: Colors.primary,
           boxShadow: `0 0 0 1px ${Colors.primary}`,
 

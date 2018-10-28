@@ -39,6 +39,16 @@ class Colors {
    * Blue Selected Color
    */
   public static selectedBlue = '#2684FF';
+
+  /**
+   * Grey For Backgrounds
+   */
+  public static backgroundGrey = '#FAFAFA';
+
+  /**
+   * Grey For Inputs
+   */
+  public static inputGrey = '#FAFAFA'; // '#F5F5F5'
 }
 
 export default Colors;

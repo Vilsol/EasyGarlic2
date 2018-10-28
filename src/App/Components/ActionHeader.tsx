@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginLeft: '0.5em',
-    marginRight: '0.5em',
+    marginLeft: '1em',
+    marginRight: '1em',
   },
   title: {
     margin: 0,
