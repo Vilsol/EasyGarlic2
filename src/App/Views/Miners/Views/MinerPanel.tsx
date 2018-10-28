@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     paddingLeft: '1em',
     paddingRight: '1em',
     paddingTop: 0,
+
+    height: '100%',
+    'overflow-x': 'hidden',
+    'overflow-y': 'auto',
   },
   title: {
     marginBottom: '0.25em',

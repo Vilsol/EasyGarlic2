@@ -92,11 +92,16 @@ class List extends React.Component<IListProps> {
         // (for accessibility, don't allow TAB-select when not clickable)
         onClickItem ? (
           <button
-            className={css(
-              styles.listItemContent,
-              styles.listItemLink,
-              index === selectedItem ? styles.listItemSelected : {}
-            )}
+            className={
+              // If the item is selected, add listItemSelected to the list
+              index === selectedItem
+                ? css(
+                    styles.listItemContent,
+                    styles.listItemLink,
+                    styles.listItemSelected
+                  )
+                : css(styles.listItemContent, styles.listItemLink)
+            }
             type="button"
             value={item.value}
             onClick={this.clickItemHandler}

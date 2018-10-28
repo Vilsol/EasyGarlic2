@@ -1,6 +1,7 @@
 import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
+import ActionHeader from 'App/Components/ActionHeader';
 import IEnumerableItem from 'App/Components/IEnumerableItem';
 import List from 'App/Components/List';
 import Miner from 'App/Models/Miner';
@@ -21,12 +22,7 @@ const styles = StyleSheet.create({
     'overflow-x': 'hidden',
     'overflow-y': 'auto',
   },
-  title: {
-    margin: 0,
-    paddingBottom: '0.25em',
-    paddingLeft: '0.5em',
-    paddingTop: '0.25em',
-  },
+  title: {},
 });
 
 interface IMinersState {
@@ -55,7 +51,12 @@ class Miners extends React.Component<{}, IMinersState> {
 
     return (
       <div className={`Miners`}>
-        <h1 className={css(styles.title)}>Miners</h1>
+        <ActionHeader
+          title="Miners"
+          buttonId="add-new-miner"
+          buttonLabel="Add Miner"
+          onClick={this.handleClickAddMiner}
+        />
         <div className={css(styles.flexContainer)}>
           <List
             className={`MinerSelector ${css(styles.selector)}`}
@@ -72,6 +73,14 @@ class Miners extends React.Component<{}, IMinersState> {
       </div>
     );
   }
+
+  /**
+   * Called when the Add New Miner button is clicked.
+   * Add a new miner.
+   */
+  private handleClickAddMiner = () => {
+    // TODO: Add new miner
+  };
 
   /**
    * Called when a miner is selected from the side menu list.
