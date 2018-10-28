@@ -34,6 +34,11 @@ class Colors {
    * Blue Select Color
    */
   public static selectBlue = '#B2D4FF';
+
+  /**
+   * Blue Selected Color
+   */
+  public static selectedBlue = '#2684FF';
 }
 
 export default Colors;

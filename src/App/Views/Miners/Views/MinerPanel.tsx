@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingLeft: '1em',
     paddingRight: '1em',
-    paddingTop: '0.5em',
+    paddingTop: 0,
   },
   title: {
+    marginBottom: '0.25em',
     marginTop: 0,
   },
 });
@@ -61,6 +62,7 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
       setFieldValue,
       setFieldTouched,
     }: FormikProps<Miner>) => {
+      // TODO: Refactor this, it's really ugly code oof
       // Adapt dropdown events to Formik because react-select uses its event system
       const handleDropdownChange = (value: ValueType<IEnumerableItem>) => {
         if (value !== null && !Array.isArray(value)) {

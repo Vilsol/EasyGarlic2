@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     background: 'none',
     border: 'none',
     color: 'inherit',
-    cursor: 'pointer',
     font: 'inherit',
     width: '100%',
 
@@ -37,8 +36,19 @@ const styles = StyleSheet.create({
       backgroundColor: Colors.selectBlue,
     },
   },
+
   listItemSelected: {
-    backgroundColor: Colors.hoverBlue,
+    backgroundColor: Colors.selectedBlue,
+    color: 'white',
+
+    ':active': {
+      backgroundColor: Colors.selectedBlue,
+      color: 'white',
+    },
+    ':hover': {
+      backgroundColor: Colors.selectedBlue,
+      color: 'white',
+    },
   },
 });
 
@@ -74,9 +84,7 @@ class List extends React.Component<IListProps> {
     // Create the list's content from the items
     const listContent = items.map((item, index) => (
       <li
-        className={`${css(styles.listItem)} ${
-          index === selectedItem ? css(styles.listItemSelected) : ''
-        }`}
+        className={`${css(styles.listItem)}`}
         key={item.label}
         value={item.value}
       >
@@ -84,7 +92,11 @@ class List extends React.Component<IListProps> {
         // (for accessibility, don't allow TAB-select when not clickable)
         onClickItem ? (
           <button
-            className={css(styles.listItemContent, styles.listItemLink)}
+            className={css(
+              styles.listItemContent,
+              styles.listItemLink,
+              index === selectedItem ? styles.listItemSelected : {}
+            )}
             type="button"
             value={item.value}
             onClick={this.clickItemHandler}

@@ -13,10 +13,12 @@ function getAllDevices(): Device[] {
   Object.keys(DevicePlatform).forEach(platform => {
     Object.keys(DeviceBrand).forEach(brand => {
       Object.keys(DeviceType).forEach(type => {
-        // Nvidia doesn't make CPUs
+        // Nvidia doesn't make CPUs and Intel doesn't make GPUs
         if (
-          DeviceBrand[brand] !== DeviceBrand.nvidia ||
-          DeviceType[type] !== DeviceType.cpu
+          (DeviceBrand[brand] !== DeviceBrand.nvidia ||
+            DeviceType[type] !== DeviceType.cpu) &&
+          (DeviceBrand[brand] !== DeviceBrand.intel ||
+            DeviceType[type] !== DeviceType.gpu)
         ) {
           devices.push(
             new Device(

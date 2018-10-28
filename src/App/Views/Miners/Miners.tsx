@@ -8,14 +8,24 @@ import UserData from 'App/Services/UserData';
 import MinerPanel from './Views/MinerPanel';
 
 const styles = StyleSheet.create({
-  container: {
+  flexContainer: {
     display: 'flex',
+    height: 'calc(100vh - 6.80em)',
   },
   panel: {
     flex: '3',
   },
   selector: {
     flex: '1',
+    height: '100%',
+    'overflow-x': 'hidden',
+    'overflow-y': 'auto',
+  },
+  title: {
+    margin: 0,
+    paddingBottom: '0.25em',
+    paddingLeft: '0.5em',
+    paddingTop: '0.25em',
   },
 });
 
@@ -44,18 +54,21 @@ class Miners extends React.Component<{}, IMinersState> {
     });
 
     return (
-      <div className={`Miners ${css(styles.container)}`}>
-        <List
-          className={`MinerSelector ${css(styles.selector)}`}
-          items={listOfMiners}
-          selectedItem={selectedMiner}
-          onClickItem={this.handleSelectMiner}
-        />
-        <MinerPanel
-          className={css(styles.panel)}
-          miner={miners[selectedMiner]}
-          onSaveSettings={this.handleSaveMinerSettings}
-        />
+      <div className={`Miners`}>
+        <h1 className={css(styles.title)}>Miners</h1>
+        <div className={css(styles.flexContainer)}>
+          <List
+            className={`MinerSelector ${css(styles.selector)}`}
+            items={listOfMiners}
+            selectedItem={selectedMiner}
+            onClickItem={this.handleSelectMiner}
+          />
+          <MinerPanel
+            className={css(styles.panel)}
+            miner={miners[selectedMiner]}
+            onSaveSettings={this.handleSaveMinerSettings}
+          />
+        </div>
       </div>
     );
   }
