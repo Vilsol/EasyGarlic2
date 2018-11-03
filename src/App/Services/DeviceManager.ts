@@ -1,8 +1,4 @@
-import Device, {
-  DeviceBrand,
-  DevicePlatform,
-  DeviceType,
-} from 'App/Models/Device';
+import Device, { DeviceBrand, DevicePlatform, DeviceType } from 'App/Models/Device';
 
 import osType from 'os';
 import Debug from 'Services/Debug';
@@ -13,6 +9,8 @@ const SystemInformation = (window as any).require(
   'systeminformation'
 ) as typeof sysInfo;
 const os = (window as any).require('os') as typeof osType;
+
+let deviceCache: Device[] | undefined;
 
 /**
  * Find a device with the given id.
@@ -46,6 +44,10 @@ function getPlatform(): string | undefined {
  * Get all available devices
  */
 async function getAvailableDevices(): Promise<Device[] | undefined> {
+  if (deviceCache) {
+    return deviceCache;
+  }
+
   // Get Device Platform
   const devicePlatform = getPlatform();
   if (devicePlatform === undefined) {
@@ -55,29 +57,75 @@ async function getAvailableDevices(): Promise<Device[] | undefined> {
   // Get Device Graphics
   try {
     const graphics = await SystemInformation.graphics();
-    // If there are no graphics cards, use cpu
-    if (graphics.controllers.length === 0) {
-      // TODO: CPU
-    }
+    const cpu = await SystemInformation.cpu();
+
+    const cpuDevice = new Device(
+      DeviceType.cpu,
+      vendorToBrand(cpu.vendor.trim().toLowerCase()),
+      DevicePlatform[devicePlatform],
+      cpu.brand
+    );
 
     // Loop through every device and map graphics -> device
     const devices = graphics.controllers.map(item => {
-      // Get Device Brand
-      const deviceBrand = item.vendor.trim().toLowerCase();
-
       // Create a new Device object and return it
       return new Device(
         DeviceType.gpu,
-        DeviceBrand[deviceBrand],
-        DevicePlatform[devicePlatform]
+        vendorToBrand(item.vendor.trim().toLowerCase()),
+        DevicePlatform[devicePlatform],
+        item.model
       );
+    }).filter(device => {
+      if (device.brand === cpuDevice.brand) {
+        if (device.model === cpuDevice.model) {
+          return false;
+        } else if (isIntegratedGPU(device)) {
+          return false;
+        }
+      }
+      return true;
     });
+
+    devices.push(cpuDevice);
+
+    deviceCache = devices;
+
     // Return list of devices
     return devices;
   } catch (error) {
     Debug.LogError(error);
     return undefined;
   }
+}
+
+/**
+ * Convert vendor to device brand
+ */
+function vendorToBrand(vendor: string): DeviceBrand {
+  let brand = DeviceBrand[vendor];
+
+  if (!brand) {
+    if (vendor.indexOf("intel") >= 0) {
+      brand = 'intel';
+    } else if (vendor.indexOf('advanced micro devices') >= 0) {
+      brand = 'amd';
+    }
+  }
+
+  return brand;
+}
+
+/**
+ * Check if device is an integrated GPU
+ */
+function isIntegratedGPU(device: Device): boolean {
+  if (device.brand === DeviceBrand.intel) {
+    if (device.model.toLowerCase().indexOf('hd graphics')) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /**
