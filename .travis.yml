@@ -13,7 +13,6 @@ matrix:
 
     - os: linux
       services: docker
-      language: generic
 
 cache:
   yarn: true
@@ -24,3 +23,12 @@ cache:
 script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash scripts/build-osx.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then bash scripts/build-linux.sh ; fi
+
+after_success:
+  - git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+  - git fetch --tags
+  - yarn run travis-deploy-once "yarn run semantic-release"
+
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
