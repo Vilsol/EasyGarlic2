@@ -1,8 +1,12 @@
-import Device, { DeviceBrand, DevicePlatform, DeviceType } from 'App/Models/Device';
-
 import osType from 'os';
-import Debug from 'Services/Debug';
 import sysInfo from 'systeminformation';
+
+import Device, {
+  DeviceBrand,
+  DevicePlatform,
+  DeviceType,
+} from 'App/Models/Device';
+import Debug from 'Services/Debug';
 
 /* Require with Types + Electron */
 const SystemInformation = (window as any).require(
@@ -67,24 +71,26 @@ async function getAvailableDevices(): Promise<Device[] | undefined> {
     );
 
     // Loop through every device and map graphics -> device
-    const devices = graphics.controllers.map(item => {
-      // Create a new Device object and return it
-      return new Device(
-        DeviceType.gpu,
-        vendorToBrand(item.vendor.trim().toLowerCase()),
-        DevicePlatform[devicePlatform],
-        item.model
-      );
-    }).filter(device => {
-      if (device.brand === cpuDevice.brand) {
-        if (device.model === cpuDevice.model) {
-          return false;
-        } else if (isIntegratedGPU(device)) {
-          return false;
+    const devices = graphics.controllers
+      .map(item => {
+        // Create a new Device object and return it
+        return new Device(
+          DeviceType.gpu,
+          vendorToBrand(item.vendor.trim().toLowerCase()),
+          DevicePlatform[devicePlatform],
+          item.model
+        );
+      })
+      .filter(device => {
+        if (device.brand === cpuDevice.brand) {
+          if (device.model === cpuDevice.model) {
+            return false;
+          } else if (isIntegratedGPU(device)) {
+            return false;
+          }
         }
-      }
-      return true;
-    });
+        return true;
+      });
 
     devices.push(cpuDevice);
 
@@ -102,13 +108,13 @@ async function getAvailableDevices(): Promise<Device[] | undefined> {
  * Convert vendor to device brand
  */
 function vendorToBrand(vendor: string): DeviceBrand {
-  let brand = DeviceBrand[vendor];
+  let brand: DeviceBrand = DeviceBrand[vendor];
 
   if (!brand) {
-    if (vendor.indexOf("intel") >= 0) {
-      brand = 'intel';
+    if (vendor.indexOf('intel') >= 0) {
+      brand = DeviceBrand.intel;
     } else if (vendor.indexOf('advanced micro devices') >= 0) {
-      brand = 'amd';
+      brand = DeviceBrand.amd;
     }
   }
 

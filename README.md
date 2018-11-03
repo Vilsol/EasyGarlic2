@@ -20,3 +20,8 @@ Cross-platform GUI Miner for Garlicoin using Electron + React + TypeScript.
 ### Technical
 
 - [TCP Connection](https://gist.github.com/tedmiston/5935757)
+- [System Information](https://github.com/sebhildebrandt/systeminformation)
+
+## Contributing
+
+Feel free to submit a PR. Thanks!

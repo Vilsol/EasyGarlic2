@@ -49,8 +49,14 @@ class Device {
    * @param type Type of this device.
    * @param brand Brand of this device.
    * @param platform Platform of this device.
+   * @param model Model of this device (name).
    */
-  constructor(type: DeviceType, brand: DeviceBrand, platform: DevicePlatform, model: string) {
+  constructor(
+    type: DeviceType,
+    brand: DeviceBrand,
+    platform: DevicePlatform,
+    model: string
+  ) {
     this.type = type;
     this.brand = brand;
     this.platform = platform;
@@ -102,7 +108,11 @@ class Device {
   }
 
   public getId(): string {
-    return `${this.platform}_${this.brand}_${this.type}_${this.model}`;
+    // Get ID and convert to snake case
+    return `${this.platform}-${this.brand}-${this.type}-${this.model}`
+      .trim()
+      .toLowerCase()
+      .replace(' ', '_');
   }
 }
 
