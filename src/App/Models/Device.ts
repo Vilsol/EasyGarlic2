@@ -112,7 +112,8 @@ class Device {
     return `${this.platform}-${this.brand}-${this.type}-${this.model}`
       .trim()
       .toLowerCase()
-      .replace(' ', '_');
+      .replace(/\s/g, '_')
+      .replace(/[^a-z0-9-_]/g, '');
   }
 }
 
