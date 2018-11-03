@@ -16,6 +16,5 @@ cache:
   yarn: true
 
 script:
-  - yarn run preelectron-pack
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn run electron-pack-macos ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash scripts/build-osx.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then bash scripts/build-linux.sh ; fi
