@@ -5,6 +5,10 @@ import MinerOptions from './MinerOptions';
  * Stores non-runtime data of a miner.
  */
 class Miner {
+  public static async Default(): Promise<Miner> {
+    const device: Device = await Device.Default();
+    return new Miner('Miner', device, MinerOptions.Default(), '');
+  }
   public static ObjectToMiner(miner: any): Miner {
     return new Miner(
       miner.name,

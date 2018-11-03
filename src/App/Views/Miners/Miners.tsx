@@ -1,11 +1,13 @@
 import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
+import Colors from 'Services/Colors';
+
+import Button from 'App/Components/Button';
 import IEnumerableItem from 'App/Components/IEnumerableItem';
 import List from 'App/Components/List';
 import Miner from 'App/Models/Miner';
 import UserData from 'App/Services/UserData';
-import Colors from 'Models/Colors';
 import MinerPanel from './Views/MinerPanel';
 
 const styles = StyleSheet.create({
@@ -67,10 +69,6 @@ class Miners extends React.Component<{}, IMinersState> {
         value: miner.getId(),
       } as IEnumerableItem;
     });
-    listOfMiners.push({
-      label: '+ Add Miner',
-      value: 'add_miner',
-    } as IEnumerableItem);
 
     return (
       <div className={`Miners ${css(styles.body)}`}>
@@ -82,6 +80,13 @@ class Miners extends React.Component<{}, IMinersState> {
               items={listOfMiners}
               selectedItem={selectedMiner}
               onClickItem={this.handleSelectMiner}
+            />
+            <Button
+              id="add-miner"
+              type="button"
+              label="Add Miner"
+              variant="secondary"
+              onClick={this.addMiner}
             />
           </div>
           <div className={css(styles.panelContainer)}>
@@ -100,8 +105,12 @@ class Miners extends React.Component<{}, IMinersState> {
    * Called when the Add New Miner button is clicked.
    * Add a new miner.
    */
-  private addMiner = () => {
-    // TODO: Add new miner
+  private addMiner = async () => {
+    const { miners } = this.state;
+    const defaultMiner: Miner = await Miner.Default();
+    defaultMiner.name = 'New Miner';
+    miners.push(defaultMiner);
+    this.setState({ miners, selectedMiner: miners.length - 1 });
   };
 
   /**
@@ -111,11 +120,6 @@ class Miners extends React.Component<{}, IMinersState> {
    */
   private handleSelectMiner = (id: string) => {
     const { miners } = this.state;
-    // If clicked on Add Miner button
-    if (id === 'add_miner') {
-      // TODO: Add New Miner
-      this.addMiner();
-    }
     const index: number = miners.findIndex(x => x.getId() === id);
     this.setState({ selectedMiner: index });
   };

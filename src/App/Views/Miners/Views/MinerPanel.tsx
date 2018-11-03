@@ -9,7 +9,7 @@ import IEnumerableItem from 'App/Components/IEnumerableItem';
 import InputField from 'App/Components/InputField';
 import Device from 'App/Models/Device';
 import Miner from 'App/Models/Miner';
-import { getAllDevices, getDeviceWithId } from 'App/Services/DeviceManager';
+import DeviceManager from 'App/Services/DeviceManager';
 
 // TODO: Rewrite CSS so that it uses an auto height, but it scrolls when it can't display everything
 const styles = StyleSheet.create({
@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     padding: '1.5em',
   },
   scrollableContainer: {
+    paddingLeft: '0.125em',
+    paddingRight: '0.125em',
     width: '100%',
 
     'overflow-x': 'hidden',
@@ -41,10 +43,12 @@ interface IMinerPanelProps {
 }
 
 interface IMinerPanelState {
+  availableDevices: Device[];
   miner: Miner | undefined;
 }
 
 const initialState = {
+  availableDevices: [],
   miner: undefined,
 };
 
@@ -61,6 +65,13 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
 
   public readonly state: IMinerPanelState = initialState;
 
+  public async componentDidMount() {
+    const devices = await DeviceManager.getAvailableDevices();
+    if (devices !== undefined) {
+      this.setState({ availableDevices: devices });
+    }
+  }
+
   public render() {
     const { className } = this.props;
     const { miner } = this.state;
@@ -74,12 +85,14 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
     }: FormikProps<Miner>) => {
       // TODO: Refactor this, it's really ugly code oof
       // Adapt dropdown events to Formik because react-select uses its event system
-      const handleDropdownChange = (value: ValueType<IEnumerableItem>) => {
+      const handleDropdownChange = async (
+        value: ValueType<IEnumerableItem>
+      ) => {
         if (value !== null && !Array.isArray(value)) {
           // Set value to device corresponding to the given id
           setFieldValue(
             'device',
-            value ? getDeviceWithId(value.value) : undefined
+            value ? await DeviceManager.getDeviceWithId(value.value) : undefined
           );
         }
       };
@@ -110,7 +123,7 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
             label="Device"
             onChange={handleDropdownChange}
             onBlur={handleDropdownBlur}
-            options={getAllDevices().map(deviceToEnumerable)}
+            options={this.state.availableDevices.map(deviceToEnumerable)}
             value={deviceToEnumerable(values.device)}
             isMulti={false}
           />

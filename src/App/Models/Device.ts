@@ -1,3 +1,5 @@
+import DeviceManager from 'App/Services/DeviceManager';
+
 /**
  * Type of Mining Devices
  */
@@ -28,6 +30,14 @@ enum DevicePlatform {
  * Stores data about mining devices, ie. Nvidia GPU.
  */
 class Device {
+  public static async Default(): Promise<Device> {
+    const device: Device | undefined = await DeviceManager.getDefaultDevice();
+    if (device === undefined) {
+      // TODO: Better error handling
+      throw new Error('No compatible device found for current system.');
+    }
+    return device;
+  }
   public type: DeviceType;
   public brand: DeviceBrand;
   public platform: DevicePlatform;
@@ -42,6 +52,7 @@ class Device {
     this.type = type;
     this.brand = brand;
     this.platform = platform;
+    // TODO: Add Device Names based on the ACTUAL device's name
   }
 
   /**

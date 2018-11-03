@@ -1,7 +1,7 @@
 import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
-import Colors from 'Models/Colors';
+import Colors from 'Services/Colors';
 
 // Styles for the entire form and its content
 const styles = StyleSheet.create({
@@ -26,13 +26,14 @@ const styles = StyleSheet.create({
     outline: '0',
     transition: 'all 100ms',
 
-    ':focus': {
-      borderColor: Colors.primary,
-      boxShadow: `0 0 0 1px ${Colors.primary}`,
-    },
     ':hover': {
       backgroundColor: 'hsl(0,0%,98%)',
       borderColor: 'hsl(0,0%,70%)',
+    },
+
+    ':focus': {
+      borderColor: Colors.primary,
+      boxShadow: `0 0 0 1px ${Colors.primary}`,
     },
   },
   primary: {
@@ -72,7 +73,7 @@ interface IButtonProps {
   className?: string;
   disabled?: boolean;
   id: string;
-  label?: string;
+  label: string;
   type: 'submit' | 'button' | 'link';
   variant:
     | ('primary' | 'secondary' | 'big')

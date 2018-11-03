@@ -20,6 +20,12 @@
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "paths": {
+      "*": [
+        "../typings/*",
+        "*"
+      ]
+    }
   },
   "exclude": [
     "node_modules",

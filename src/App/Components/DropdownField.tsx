@@ -5,7 +5,7 @@ import { Styles } from 'react-select/lib/styles';
 import { ValueType } from 'react-select/lib/types';
 
 import IEnumerableItem from 'App/Components/IEnumerableItem';
-import Colors from 'Models/Colors';
+import Colors from 'Services/Colors';
 
 // Styles for the entire form and its content
 const styles = StyleSheet.create({

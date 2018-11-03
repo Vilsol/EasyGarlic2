@@ -2,7 +2,7 @@ import { css, StyleSheet } from 'aphrodite';
 import React, { ReactNode } from 'react';
 
 import Navbar from 'App/Components/Navbar';
-import Colors from 'Models/Colors';
+import Colors from 'Services/Colors';
 
 interface IAppProps {
   children?: ReactNode;

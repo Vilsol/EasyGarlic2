@@ -1,7 +1,7 @@
 import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
-import Colors from 'Models/Colors';
+import Colors from 'Services/Colors';
 
 // Styles for the entire form and its content
 const styles = StyleSheet.create({

@@ -1,3 +1,5 @@
+import Debug from 'Services/Debug';
+
 // tslint:disable:no-console
 // In production, we register a service worker to serve assets from local cache.
 
@@ -9,10 +11,8 @@
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
 
-function onError(e: any) {
-  // TODO: Make better error checking
-  console.error(e);
-}
+// TODO: Make better error checking
+const onError = Debug.LogError;
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -90,7 +90,7 @@ function registerValidSW(swUrl: string) {
       };
     })
     .catch(error => {
-      console.error('Error during service worker registration:', error);
+      onError('Error during service worker registration:', error);
     });
 }
 
@@ -120,9 +120,7 @@ function checkValidServiceWorker(swUrl: string) {
       }
     })
     .catch(() => {
-      console.log(
-        'No internet connection found. App is running in offline mode.'
-      );
+      onError('No internet connection found. App is running in offline mode.');
     });
 }
 

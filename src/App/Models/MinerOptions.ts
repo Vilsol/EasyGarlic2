@@ -5,6 +5,12 @@ import Device, { DeviceBrand, DeviceType } from './Device';
  */
 class MinerOptions {
   /**
+   * Get the Default Miner Options
+   */
+  public static Default(): MinerOptions {
+    return new MinerOptions('allium', '', '');
+  }
+  /**
    * The algorithm that this miner should use.
    */
   public algorithm: string;

@@ -2,7 +2,7 @@ import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Colors from 'Models/Colors';
+import Colors from 'Services/Colors';
 
 const styles = StyleSheet.create({
   fixed: {

@@ -2,7 +2,7 @@ import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
 import IEnumerableItem from 'App/Components/IEnumerableItem';
-import Colors from 'Models/Colors';
+import Colors from 'Services/Colors';
 
 // Styles for the entire form and its content
 const styles = StyleSheet.create({
