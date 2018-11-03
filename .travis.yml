@@ -32,3 +32,7 @@ after_success:
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
+
+env:
+  global:
+    secure: "RX9/K9vfiDD/PftdAiCqQ3NFe5j0VeyhhuSV+j7PFejM/ItifIYsRdG0npMP+KepE30hB5gt7CUcBpHCG+AKPFDRIO1LTvZaLxdMc1timIdqGX0p3Xqh6Dh15xDh/4q7IZkypZAzGedjWWXWJQ6NGsi0SSu6+YJ+5LOkpAViXIMVJIsYW5fODqpFYPxUQWPVjEtC5UmtN0pwHcTQY1mOttNSZ526M1FyWKtgZikI6sZ7JCLdsTG9WjcAIAIgBiPZoaLXbaY+TAQb9uDE+rHBaPHpqffUKTNM5pQCjAAn0NwwZEIk1i0yjU2rlP/TfbJV59dtb0pQRsZgj8B1Cqrbkoeswc3cuPyI5G5mLnwErH4ent1z78mnb00g8m+VOAdh1ZntevIaBRKCG73mWjCf5LthvmQT+ntzz9ysu0A/Mnsi1HMyjmru+k2XYeZwPqICHdCxzf07Akv9zI4Bnd4oCFzsrMk96BDQDgdnFbd/1LktiAKOJkb8aJN/ocJa1L4QTh2o8F80FLq9Tpo2ZCtiKoabjPtaigh0K7iGOglx7yMQ6WSXGbHJlxELjZTyDAxWA79NXArKdtnROUtU9PLwEIrvZSqu4xc3SrVS1huHQQhMPf5C7Iat0RNHvtOB1Lqen1kuTH05D09Ia+s3CwOs8NWvJ52trkUB4mFZT2u7el8="
