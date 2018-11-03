@@ -119,7 +119,6 @@ function vendorToBrand(vendor: string): DeviceBrand {
  * Check if device is an integrated GPU
  */
 function isIntegratedGPU(device: Device): boolean {
-  console.log(device.brand, device.model);
   if (device.brand === DeviceBrand.intel) {
     if (device.model.toLowerCase().indexOf('hd graphics')) {
       return true;
