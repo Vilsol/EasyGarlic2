@@ -12,7 +12,7 @@ class Miner {
   public static ObjectToMiner(miner: any): Miner {
     return new Miner(
       miner.name,
-      new Device(miner.device.type, miner.device.brand, miner.device.platform),
+      new Device(miner.device.type, miner.device.brand, miner.device.platform, miner.device.model),
       new MinerOptions(
         miner.options.algorithm,
         miner.options.intensity,

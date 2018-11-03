@@ -15,6 +15,7 @@ enum DeviceBrand {
   nvidia = 'nvidia',
   amd = 'amd',
   intel = 'intel',
+  ati = 'ati',
 }
 
 /**
@@ -41,6 +42,7 @@ class Device {
   public type: DeviceType;
   public brand: DeviceBrand;
   public platform: DevicePlatform;
+  public model: string;
 
   /**
    * Create a new Device object.
@@ -48,10 +50,11 @@ class Device {
    * @param brand Brand of this device.
    * @param platform Platform of this device.
    */
-  constructor(type: DeviceType, brand: DeviceBrand, platform: DevicePlatform) {
+  constructor(type: DeviceType, brand: DeviceBrand, platform: DevicePlatform, model: string) {
     this.type = type;
     this.brand = brand;
     this.platform = platform;
+    this.model = model;
     // TODO: Add Device Names based on the ACTUAL device's name
   }
 
@@ -78,6 +81,8 @@ class Device {
         return 'AMD';
       case DeviceBrand.intel:
         return 'Intel';
+      case DeviceBrand.ati:
+        return 'ATI';
     }
   }
 
@@ -93,11 +98,11 @@ class Device {
   }
 
   public getName(): string {
-    return `${this.getFormattedPlatform()} ${this.getFormattedBrand()} ${this.getFormattedType()}`;
+    return `${this.getFormattedType()} - ${this.model}`;
   }
 
   public getId(): string {
-    return `${this.platform}_${this.brand}_${this.type}`;
+    return `${this.platform}_${this.brand}_${this.type}_${this.model}`;
   }
 }
 
