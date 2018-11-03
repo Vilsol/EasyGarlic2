@@ -33,8 +33,7 @@
     "electron-pack-win": "build --win --c.extraMetadata.main=build/electron.js",
     "electron-pack-macos": "build --mac --c.extraMetadata.main=build/electron.js",
     "electron-pack-docker": "build --linux --win --c.extraMetadata.main=build/electron.js",
-    "travis-deploy-once": "travis-deploy-once --pro",
-    "semantic-release": "semantic-release pre && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@types/color": "^3.0.0",
@@ -53,7 +52,6 @@
     "electron-devtools-installer": "^2.2.4",
     "last-release-git": "^0.0.3",
     "semantic-release": "^15.10.7",
-    "travis-deploy-once": "^5.0.9",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.1.3",
     "wait-on": "^3.1.0"
@@ -83,6 +81,7 @@
     "url": "https://github.com/Vilsol/EasyGarlic2.git"
   },
   "release": {
-    "getLastRelease": "last-release-git"
+    "getLastRelease": "last-release-git",
+    "branch": "typescript"
   }
 }
