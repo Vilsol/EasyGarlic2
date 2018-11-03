@@ -31,7 +31,8 @@
     "electron-pack": "build --c.extraMetadata.main=build/electron.js",
     "electron-pack-linux": "build --linux --c.extraMetadata.main=build/electron.js",
     "electron-pack-win": "build --win --c.extraMetadata.main=build/electron.js",
-    "electron-pack-macos": "build --mac --c.extraMetadata.main=build/electron.js"
+    "electron-pack-macos": "build --mac --c.extraMetadata.main=build/electron.js",
+    "electron-pack-docker": "build --linux --win --c.extraMetadata.main=build/electron.js"
   },
   "devDependencies": {
     "@types/color": "^3.0.0",

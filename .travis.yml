@@ -9,6 +9,8 @@ matrix:
       osx_image: xcode9.4
 
     - os: linux
+      services: docker
+      language: generic
 
 cache:
   yarn: true
@@ -16,5 +18,4 @@ cache:
 script:
   - yarn run preelectron-pack
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn run electron-pack-macos ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then yarn run electron-pack-linux ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then yarn run electron-pack-win ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then bash scripts/build-linux.sh ; fi
