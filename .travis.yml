@@ -13,6 +13,7 @@ matrix:
 
     - os: linux
       services: docker
+      sudo: true
 
 cache:
   yarn: true
@@ -25,6 +26,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then bash scripts/build-linux.sh ; fi
 
 after_success:
+  - sudo chown -R travis:travis /home/travis/
   - git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
   - git fetch --tags
   - yarn run travis-deploy-once "yarn run semantic-release"
