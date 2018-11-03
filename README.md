@@ -24,4 +24,10 @@ Cross-platform GUI Miner for Garlicoin using Electron + React + TypeScript.
 
 ## Contributing
 
-Feel free to submit a PR. Thanks!
+Feel free to submit a PR.
+
+If you want to see tasks that need to be worked on, check out the [Project Board](https://github.com/PandawanFr/EasyGarlic2/projects/1). Major tasks are made into issues, while minor tasks are just notes.
+
+_If you are a collaborator for this project_, please submit PRs for major tasks (even if you could just push your changes directly).
+
+Thanks!
