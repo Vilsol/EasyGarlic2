@@ -27,7 +27,7 @@
     "cra-eject": "react-scripts-ts eject",
     "electron-dev": "concurrently \"cross-env BROWSER=none yarn cra-start\" \"wait-on http://localhost:3000 && electron .\"",
     "preelectron-pack": "yarn cra-build",
-    "electron-pack": "build --em.main=build/electron.js"
+    "electron-pack": "build --c.extraMetadata.main=build/electron.js"
   },
   "devDependencies": {
     "@types/color": "^3.0.0",
