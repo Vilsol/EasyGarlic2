@@ -33,7 +33,7 @@
     "electron-pack-win": "build --win --c.extraMetadata.main=build/electron.js",
     "electron-pack-macos": "build --mac --c.extraMetadata.main=build/electron.js",
     "electron-pack-docker": "build --linux --win --c.extraMetadata.main=build/electron.js",
-    "travis-deploy-once": "travis-deploy-once",
+    "travis-deploy-once": "travis-deploy-once --pro",
     "semantic-release": "semantic-release pre && semantic-release post"
   },
   "devDependencies": {
