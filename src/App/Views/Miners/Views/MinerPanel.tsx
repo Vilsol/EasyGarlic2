@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     'overflow-x': 'hidden',
     'overflow-y': 'auto',
   },
+
   subtitle: {
     margin: 0,
     paddingBottom: '0.25em',
@@ -33,6 +34,19 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: '0.25em',
     marginTop: 0,
+  },
+
+  button: {
+    ':not(:first-child)': {
+      marginLeft: '0.25em',
+    },
+    ':not(:last-child)': {
+      marginRight: '0.25em',
+    },
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
   },
 });
 
@@ -152,12 +166,23 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          <Button
-            id="saveButton"
-            type="button"
-            label="Save"
-            variant="primary"
-          />
+          <div className={css(styles.buttonContainer)}>
+            <Button
+              className={css(styles.button)}
+              id="saveButton"
+              type="button"
+              label="Save"
+              variant="primary"
+            />
+            <Button
+              className={css(styles.button)}
+              id="dangerButton"
+              type="button"
+              label="Delete"
+              variant="danger"
+              onClick={this.handleDelete}
+            />
+          </div>
         </Form>
       );
     };
@@ -193,6 +218,10 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
   private handleSave = (values: Miner) => {
     const { onSaveSettings } = this.props;
     onSaveSettings(values);
+  };
+
+  private handleDelete = () => {
+    // TODO: Add delete system
   };
 }
 

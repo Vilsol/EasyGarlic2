@@ -119,7 +119,7 @@ class List extends React.Component<IListProps> {
     );
   }
 
-  private clickItemHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+  private clickItemHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const { onClickItem } = this.props;
     // Make sure onClickItem exists
     if (onClickItem && e.target instanceof HTMLButtonElement) {
@@ -127,7 +127,8 @@ class List extends React.Component<IListProps> {
       // Force lose focus
       e.target.blur();
       // Call onClickItem event
-      onClickItem(value);
+      // tslint:disable-next-line:await-promise
+      await onClickItem(value);
     }
   };
 }

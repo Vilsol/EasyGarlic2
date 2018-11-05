@@ -36,6 +36,30 @@ const styles = StyleSheet.create({
       boxShadow: `0 0 0 1px ${Colors.primary}`,
     },
   },
+
+  danger: {
+    backgroundColor: Colors.danger,
+    borderColor: Colors.dangerLighter,
+    color: 'white',
+
+    ':active': {
+      backgroundColor: Colors.dangerDarker,
+      borderColor: Colors.dangerDarker,
+    },
+
+    ':focus': {
+      borderColor: Colors.dangerDarker,
+    },
+    ':hover': {
+      backgroundColor: Colors.danger,
+      borderColor: Colors.dangerDarker,
+    },
+
+    ':disabled': {
+      backgroundColor: `${Colors.dangerLighter} !important`,
+      borderColor: `${Colors.dangerLighter} !important`,
+    },
+  },
   primary: {
     backgroundColor: Colors.primary,
     borderColor: Colors.primaryLighter,
@@ -76,8 +100,8 @@ interface IButtonProps {
   label: string;
   type: 'submit' | 'button' | 'link';
   variant:
-    | ('primary' | 'secondary' | 'big')
-    | Array<'primary' | 'secondary' | 'big'>;
+    | ('primary' | 'secondary' | 'big' | 'danger' | 'inline')
+    | Array<'primary' | 'secondary' | 'big' | 'danger' | 'inline'>;
   onClick?: (
     e: React.MouseEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
   ) => void;
@@ -94,6 +118,7 @@ class Button extends React.Component<IButtonProps> {
   public render() {
     const { className, disabled, id, label, type, variant } = this.props;
     const variantArray = typeof variant === 'string' ? [variant] : variant;
+    console.log(variantArray);
     if (type === 'submit') {
       return (
         <input

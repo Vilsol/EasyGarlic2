@@ -4,7 +4,7 @@ class Colors {
   /**
    * Garlicoin Yellow
    */
-  public static primary: string = '#ffca42';
+  public static primary = '#ffca42';
 
   /**
    * Garlicoin Yellow Lighter (0.25)
@@ -17,6 +17,25 @@ class Colors {
    * Garlicoin Yellow Darker (0.25)
    */
   public static primaryDarker = color(Colors.primary)
+    .darken(0.25)
+    .hex();
+
+  /**
+   * Danger Red
+   */
+  public static danger = '#ff3b30';
+
+  /**
+   * Danger Red Lighter (0.25)
+   */
+  public static dangerLighter = color(Colors.danger)
+    .lighten(0.25)
+    .hex();
+
+  /**
+   * Danger Red Darker (0.25)
+   */
+  public static dangerDarker = color(Colors.danger)
     .darken(0.25)
     .hex();
 

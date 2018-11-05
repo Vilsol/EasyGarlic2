@@ -3,7 +3,6 @@ import React from 'react';
 
 import Colors from 'Services/Colors';
 
-import Button from 'App/Components/Button';
 import IEnumerableItem from 'App/Components/IEnumerableItem';
 import List from 'App/Components/List';
 import Miner from 'App/Models/Miner';
@@ -70,23 +69,23 @@ class Miners extends React.Component<{}, IMinersState> {
       } as IEnumerableItem;
     });
 
+    // Add an "+ Add Miner" button in the list
+    listOfMiners.push({
+      label: '+ Add Miner',
+      // Use a + so that it can't be confused with a miner with the same ID
+      value: '+_add_miner',
+    });
+
     return (
       <div className={`Miners ${css(styles.body)}`}>
         <div className={css(styles.flexContainer)}>
           <div className={css(styles.selector)}>
             <h1 className={css(styles.title)}>Miners</h1>
             <List
-              className={`MinerSelector `}
+              className={`MinerSelector`}
               items={listOfMiners}
               selectedItem={selectedMiner}
               onClickItem={this.handleSelectMiner}
-            />
-            <Button
-              id="add-miner"
-              type="button"
-              label="Add Miner"
-              variant="secondary"
-              onClick={this.addMiner}
             />
           </div>
           <div className={css(styles.panelContainer)}>
@@ -118,8 +117,16 @@ class Miners extends React.Component<{}, IMinersState> {
    * Change the view to that miner.
    * @param id The id of the miner that has been selected
    */
-  private handleSelectMiner = (id: string) => {
+  private handleSelectMiner = async (id: string) => {
     const { miners } = this.state;
+
+    // If adding miner
+    if (id === '+_add_miner') {
+      await this.addMiner();
+      return;
+    }
+
+    // Set the selected miner to new ID
     const index: number = miners.findIndex(x => x.getId() === id);
     this.setState({ selectedMiner: index });
   };
