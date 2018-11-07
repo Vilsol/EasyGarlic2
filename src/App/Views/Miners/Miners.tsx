@@ -2,11 +2,13 @@ import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
 import Colors from 'Services/Colors';
+import Utilities from 'Services/Utilities';
 
 import IEnumerableItem from 'App/Components/IEnumerableItem';
 import List from 'App/Components/List';
 import Miner from 'App/Models/Miner';
 import UserData from 'App/Services/UserData';
+
 import MinerPanel from './Views/MinerPanel';
 
 const styles = StyleSheet.create({
@@ -107,7 +109,11 @@ class Miners extends React.Component<{}, IMinersState> {
   private addMiner = async () => {
     const { miners } = this.state;
     const defaultMiner: Miner = await Miner.Default();
-    defaultMiner.name = 'New Miner';
+    defaultMiner.name = Utilities.getNextValue(
+      miners.map(m => m.name),
+      'New Miner'
+    );
+    console.log(defaultMiner.name);
     miners.push(defaultMiner);
     this.setState({ miners, selectedMiner: miners.length - 1 });
   };

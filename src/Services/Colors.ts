@@ -1,6 +1,6 @@
 import color from 'color';
 
-class Colors {
+export default class Colors {
   /**
    * Garlicoin Yellow
    */
@@ -69,5 +69,3 @@ class Colors {
    */
   public static inputGrey = '#FAFAFA'; // '#F5F5F5'
 }
-
-export default Colors;

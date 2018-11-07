@@ -118,7 +118,6 @@ class Button extends React.Component<IButtonProps> {
   public render() {
     const { className, disabled, id, label, type, variant } = this.props;
     const variantArray = typeof variant === 'string' ? [variant] : variant;
-    console.log(variantArray);
     if (type === 'submit') {
       return (
         <input
