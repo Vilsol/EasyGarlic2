@@ -5,7 +5,7 @@ import ElectronStore from 'electron-store';
 const es = (window as any).require('electron-store') as typeof ElectronStore;
 
 // Need to require from electron in very strange way because electron :(
-const store: ElectronStore = new es();
+const store: ElectronStore = new es({ name: 'data' });
 
 // TODO: Perhaps find a way to cache the store? idk fam
 

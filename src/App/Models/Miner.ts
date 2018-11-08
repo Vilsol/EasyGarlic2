@@ -1,6 +1,8 @@
 import Device from 'App/Models/Device';
 import MinerOptions from './MinerOptions';
 
+import uuidGenerator from 'uuid/v4';
+
 /**
  * Stores non-runtime data of a miner.
  */
@@ -9,16 +11,23 @@ class Miner {
     const device: Device = await Device.Default();
     return new Miner('Miner', device, MinerOptions.Default(), '');
   }
+
   public static ObjectToMiner(miner: any): Miner {
     return new Miner(
       miner.name,
-      new Device(miner.device.type, miner.device.brand, miner.device.platform, miner.device.model),
+      new Device(
+        miner.device.type,
+        miner.device.brand,
+        miner.device.platform,
+        miner.device.model
+      ),
       new MinerOptions(
         miner.options.algorithm,
         miner.options.intensity,
         miner.options.parameters
       ),
-      miner.installPath
+      miner.installPath,
+      miner.uuid ? miner.uuid : undefined
     );
   }
   /**
@@ -42,6 +51,11 @@ class Miner {
   public installPath: string;
 
   /**
+   * UUID of the miner to identify rather than using the name
+   */
+  public uuid: string;
+
+  /**
    * Create a new Miner object.
    * @param name Name of this miner
    * @param device Device that this miner should use
@@ -52,22 +66,15 @@ class Miner {
     name: string,
     device: Device,
     options: MinerOptions,
-    installPath: string
+    installPath: string,
+    uuid?: string
   ) {
     this.name = name;
     this.device = device;
     this.options = options;
     this.installPath = installPath;
-  }
-
-  /**
-   * Get an id to represent the given miner.
-   */
-  public getId(): string {
-    return this.name
-      .trim()
-      .toLowerCase()
-      .replace(' ', '_');
+    // Set UUID or generate a new one
+    this.uuid = uuid !== undefined ? uuid : uuidGenerator();
   }
 
   public getCommand(): string {

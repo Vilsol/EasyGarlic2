@@ -67,7 +67,7 @@ class Miners extends React.Component<{}, IMinersState> {
     const listOfMiners: IEnumerableItem[] = miners.map(miner => {
       return {
         label: miner.name,
-        value: miner.getId(),
+        value: miner.uuid,
       } as IEnumerableItem;
     });
 
@@ -133,7 +133,7 @@ class Miners extends React.Component<{}, IMinersState> {
     }
 
     // Set the selected miner to new ID
-    const index: number = miners.findIndex(x => x.getId() === id);
+    const index: number = miners.findIndex(x => x.uuid === id);
     this.setState({ selectedMiner: index });
   };
 
