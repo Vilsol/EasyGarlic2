@@ -9,7 +9,7 @@ export default class Utilities {
    * @param valueToSearch The values to search for duplicates.
    */
   public static getNextValue(values: string[], valueToSearch: string): string {
-    const regex = new RegExp(`${valueToSearch}( \([\d.]\))?`);
+    const regex = new RegExp(`^(?:${valueToSearch}( \([\d.]+\))?)$`);
     const valuesFound = values.filter(n => regex.test(n));
     if (valuesFound.length > 0) {
       return `${valueToSearch} (${valuesFound.length})`;

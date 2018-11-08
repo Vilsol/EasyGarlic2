@@ -53,12 +53,17 @@ interface IMinersState {
 }
 
 const initialState: IMinersState = {
-  miners: UserData.getMiners(),
+  miners: [],
   selectedMiner: 0,
 };
 
 class Miners extends React.Component<{}, IMinersState> {
   public readonly state: IMinersState = initialState;
+
+  public componentDidMount() {
+    // Load the miner data
+    this.setState({ miners: UserData.getMiners() });
+  }
 
   public render() {
     const { miners, selectedMiner } = this.state;
@@ -95,6 +100,7 @@ class Miners extends React.Component<{}, IMinersState> {
               className={css(styles.panel)}
               miner={miners[selectedMiner]}
               onSaveSettings={this.handleSaveMinerSettings}
+              onDeleteMiner={this.handleDeleteMiner}
             />
           </div>
         </div>
@@ -113,9 +119,26 @@ class Miners extends React.Component<{}, IMinersState> {
       miners.map(m => m.name),
       'New Miner'
     );
-    console.log(defaultMiner.name);
     miners.push(defaultMiner);
+    // Save it in UserData
+    UserData.setMiners(miners);
     this.setState({ miners, selectedMiner: miners.length - 1 });
+  };
+
+  /**
+   * Called when the Delete button is clicked.
+   * Remove the miner with the given id.
+   * @param id The id of the miner to remove.
+   */
+  private handleDeleteMiner = async (id: string) => {
+    const { miners, selectedMiner } = this.state;
+    const newMiners = miners.filter(miner => miner.uuid !== id);
+    // Keep the current position only if it doesn't overflow
+    const newPosition = Math.min(selectedMiner, newMiners.length - 1);
+    // Save it in UserData
+    UserData.setMiners(newMiners);
+    // Save it in state
+    this.setState({ miners: newMiners, selectedMiner: newPosition });
   };
 
   /**

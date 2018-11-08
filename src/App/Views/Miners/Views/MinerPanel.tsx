@@ -54,6 +54,7 @@ interface IMinerPanelProps {
   className?: string;
   miner: Miner;
   onSaveSettings: (miner: Miner) => void;
+  onDeleteMiner: (id: string) => void;
 }
 
 interface IMinerPanelState {
@@ -220,8 +221,13 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
     onSaveSettings(values);
   };
 
+  /**
+   * Called when the Delete button is clicked.
+   * Send the uuid of the mienr to be deleted to the Mienrs component.
+   */
   private handleDelete = () => {
-    // TODO: Add delete system
+    const { miner, onDeleteMiner } = this.props;
+    onDeleteMiner(miner.uuid);
   };
 }
 
