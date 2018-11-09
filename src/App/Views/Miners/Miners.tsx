@@ -4,11 +4,10 @@ import React from 'react';
 import Colors from 'Services/Colors';
 import Utilities from 'Services/Utilities';
 
-import IEnumerableItem from 'App/Components/IEnumerableItem';
-import List from 'App/Components/List';
+import IEnumerableItem from 'App/Components/Collections/IEnumerableItem';
+import List from 'App/Components/Collections/List';
 import Miner from 'App/Models/Miner';
 import UserData from 'App/Services/UserData';
-
 import MinerPanel from './Views/MinerPanel';
 
 const styles = StyleSheet.create({
@@ -89,7 +88,6 @@ class Miners extends React.Component<{}, IMinersState> {
           <div className={css(styles.selector)}>
             <h1 className={css(styles.title)}>Miners</h1>
             <List
-              className={`MinerSelector`}
               items={listOfMiners}
               selectedItem={selectedMiner}
               onClickItem={this.handleSelectMiner}

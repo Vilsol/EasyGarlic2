@@ -1,7 +1,7 @@
 import { css, StyleSheet } from 'aphrodite';
 import React from 'react';
 
-import IEnumerableItem from 'App/Components/IEnumerableItem';
+import IEnumerableItem from 'App/Components/Collections/IEnumerableItem';
 import Colors from 'Services/Colors';
 
 // Styles for the entire form and its content
@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
   },
-  listItem: {},
   listItemContent: {
     display: 'block',
     padding: '0.5em',
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
 interface IListProps {
   className?: string;
   items: IEnumerableItem[];
-  isOrdered?: boolean;
   onClickItem?: (id: string) => void;
   selectedItem?: number;
 }
@@ -61,31 +59,16 @@ interface IListProps {
 class List extends React.Component<IListProps> {
   public static defaultProps = {
     className: '',
-    isOrdered: false,
     onClickItem: undefined,
     selectedItem: 0,
   };
 
-  constructor(props: IListProps) {
-    super(props);
-  }
-
   public render() {
-    const {
-      className,
-      items,
-      onClickItem,
-      isOrdered,
-      selectedItem,
-    } = this.props;
+    const { className, items, onClickItem, selectedItem } = this.props;
 
     // Create the list's content from the items
     const listContent = items.map((item, index) => (
-      <li
-        className={`${css(styles.listItem)}`}
-        key={item.label}
-        value={item.value}
-      >
+      <li key={item.label} value={item.value}>
         {// If there is a click event, make it a button, otherwise make it regular text
         // (for accessibility, don't allow TAB-select when not clickable)
         onClickItem ? (
@@ -112,10 +95,8 @@ class List extends React.Component<IListProps> {
       </li>
     ));
 
-    return isOrdered ? (
+    return (
       <ul className={`${css(styles.list)} ${className}`}>{listContent}</ul>
-    ) : (
-      <ol className={`${css(styles.list)} ${className}`}>{listContent}</ol>
     );
   }
 

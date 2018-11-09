@@ -4,8 +4,8 @@ import React from 'react';
 import { ValueType } from 'react-select/lib/types';
 
 import Button from 'App/Components/Button';
-import DropdownField from 'App/Components/DropdownField';
-import IEnumerableItem from 'App/Components/IEnumerableItem';
+import DropdownField from 'App/Components/Collections/DropdownField';
+import IEnumerableItem from 'App/Components/Collections/IEnumerableItem';
 import InputField from 'App/Components/InputField';
 import Device from 'App/Models/Device';
 import Miner from 'App/Models/Miner';
