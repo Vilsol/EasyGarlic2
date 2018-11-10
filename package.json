@@ -85,7 +85,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Vilsol/EasyGarlic2.git"
+    "url": "https://github.com/PandawanFr/EasyGarlic2.git"
   },
   "release": {
     "getLastRelease": "last-release-git",
