@@ -71,11 +71,11 @@ class MinerPanel extends React.Component<IMinerPanelProps, IMinerPanelState> {
   public static getDerivedStateFromProps(
     props: IMinerPanelProps,
     state: IMinerPanelState | null
-  ): Partial<IMinerPanelState> | null {
+  ): Partial<IMinerPanelState> | undefined {
     if (state === null || state.miner !== props.miner) {
       return { miner: props.miner };
     }
-    return null;
+    return undefined;
   }
 
   public readonly state: IMinerPanelState = initialState;
